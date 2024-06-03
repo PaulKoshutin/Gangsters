@@ -62,8 +62,10 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\statsGen.cs" />
     <Compile Include="Assets\Scripts\Activity.cs" />
+    <Compile Include="Assets\Scripts\DraggableItem.cs" />
     <Compile Include="Assets\Scripts\ObjectPool.cs" />
     <Compile Include="Assets\Scripts\Strategy.cs" />
+    <Compile Include="Assets\Scripts\OrgSlot.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\OrgComponent.cs" />
     <Compile Include="Assets\Scripts\OrgComposite.cs" />

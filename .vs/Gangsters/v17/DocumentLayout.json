@@ -3,7 +3,31 @@
   "WorkspaceRootPath": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|f:\\unity\\projects\\gangsters\\gangsters\\assets\\scripts\\timer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\orgcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\orgcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\orgcomposite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\orgcomposite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\gangster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gangster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|f:\\unity\\projects\\gangsters\\gangsters\\assets\\scripts\\orgslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\orgslot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|f:\\unity\\projects\\gangsters\\gangsters\\assets\\scripts\\draggableitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\draggableitem.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\activity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\activity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\timer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\timer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -11,24 +35,8 @@
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\objectpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\gangster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gangster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\orgcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\orgcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\statsgen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\statsgen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\activity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\activity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\orgcomposite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\orgcomposite.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\imggen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -46,11 +54,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 8,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
+              "Title": "DraggableItem.cs",
+              "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\DraggableItem.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\DraggableItem.cs",
+              "ToolTip": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\DraggableItem.cs",
+              "RelativeToolTip": "Assets\\Scripts\\DraggableItem.cs",
+              "ViewState": "AQIAAAgAAAAAAAAAAAAQwCMAAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T15:12:01.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "OrgSlot.cs",
+              "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\OrgSlot.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\OrgSlot.cs",
+              "ToolTip": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\OrgSlot.cs",
+              "RelativeToolTip": "Assets\\Scripts\\OrgSlot.cs",
+              "ViewState": "AQIAAAUAAAAAAAAAAAAQwCkAAAAiAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-03T15:11:05.948Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Timer.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Timer.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Timer.cs",
@@ -58,8 +92,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Timer.cs",
               "ViewState": "AQIAAB0AAAAAAAAAAAAowDoAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-02T18:29:49.608Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-02T18:29:49.608Z"
             },
             {
               "$type": "Document",
@@ -75,7 +108,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 8,
               "Title": "statsGen.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\statsGen.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\statsGen.cs",
@@ -87,7 +120,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": "imgGen.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\imgGen.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\imgGen.cs",
@@ -99,7 +132,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "textGen.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\textGen.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\textGen.cs",
@@ -111,19 +144,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "OrgComposite.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\OrgComposite.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\OrgComposite.cs",
               "ToolTip": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\OrgComposite.cs",
               "RelativeToolTip": "Assets\\Scripts\\OrgComposite.cs",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABMAAAABAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAABMAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-06T03:53:02.724Z"
+              "WhenOpened": "2024-05-06T03:53:02.724Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "OrgComponent.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\OrgComponent.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\OrgComponent.cs",
@@ -131,7 +165,8 @@
               "RelativeToolTip": "Assets\\Scripts\\OrgComponent.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABUAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-06T03:52:29.912Z"
+              "WhenOpened": "2024-05-06T03:52:29.912Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -143,11 +178,12 @@
               "RelativeToolTip": "Assets\\Scripts\\Gangster.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAABAAAAABAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-06T03:17:02.616Z"
+              "WhenOpened": "2024-05-06T03:17:02.616Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "ObjectPool.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\ObjectPool.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ObjectPool.cs",
