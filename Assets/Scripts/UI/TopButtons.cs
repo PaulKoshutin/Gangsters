@@ -8,6 +8,10 @@ public class TopButtons : MonoBehaviour
     {
         Application.Quit();
     }
+    public void Save()
+    {
+        SaveLoader.Instance.Save();
+    }
     public void ToCity()
     {
         go(c:true);

@@ -44,14 +44,24 @@ def call_txt2img_api(payload, name):
 
 
 if __name__ == '__main__':
-    user_message = "Provide a name and surname for a modern day " + sys.argv[1] + " " + sys.argv[2] + " " + sys.argv[3] + " " + sys.argv[4] + ". You may also sometimes add a nickname or a middle name. Make it interesting. Say nothing before or after the name and surname."
+    user_message = "Provide a name and surname for a modern day " + sys.argv[1] + " " + sys.argv[2] + " " + sys.argv[3] + " " + sys.argv[4] + ". Adding a nickname or a middle name is optional, but only rarely. Make the name interesting. Say nothing before or after the name and surname."
     data = {"mode": "instruct", "character": "Assistant", "messages": [{"role": "user", "content": user_message}]}
     response = requests.post(text_url, headers=headers, json=data, verify=False)
     name = response.json()['choices'][0]['message']['content']
     name = name.replace('"', '~')
     print(name)
 
-    user_message = "Provide a short description of a modern day " + sys.argv[1] + " " + sys.argv[2] + " " + sys.argv[3] + " " + sys.argv[4] + " wearing " + sys.argv[5] + " - the gang color - for image generating ai. Remember to mention race, hair, eyes, emotion, background scenery, fat, clothes and headwear or beard if any. Make it unusual. Don't mention boots or pants, focus on the upper body and face. Say nothing before or after the description."
+    user_message_universal = " Mention age, race, hair color, haircut, emotion, background scenery, fatness, clothes, facial hair if any. Type of clothes depends on being poor or rich. Don't mention boots, pants or trousers, focus on the upper body and face. Say nothing before or after the description."
+
+    if sys.argv[4] == "gangster":
+        direct_prompt = " wearing " + sys.argv[5] + " clothes , "
+        user_message = "Provide a short description of a modern day " + sys.argv[1] + " " + sys.argv[2] + " " + sys.argv[3] + " " + sys.argv[4] + " wearing " + sys.argv[5] + " - the gang color - for image generating ai." + user_message_universal
+    elif sys.argv[4] == "policeman":
+        direct_prompt = " wearing " + sys.argv[5] + " police uniform , "
+        user_message = "Provide a short description of a modern day " + sys.argv[1] + " " + sys.argv[2] + " " + sys.argv[3] + " " + sys.argv[4] + " wearing a " + sys.argv[5] + " police uniform for image generating ai." + user_message_universal
+    else:
+        direct_prompt = ""
+        user_message = "Provide a short description of a modern day " + sys.argv[1] + " " + sys.argv[2] + " " + sys.argv[3] + " " + sys.argv[4] + " for image generating ai." + user_message_universal
     data = {"mode": "instruct", "character": "Assistant", "messages": [{"role": "user", "content": user_message}]}
     response = requests.post(text_url, headers=headers, json=data, verify=False)
     assistant_message = response.json()['choices'][0]['message']['content']
@@ -59,7 +69,7 @@ if __name__ == '__main__':
 
 
     payload = {
-        "prompt": "face close-up, SFW, " + sys.argv[1] + ", " + sys.argv[2] + ", " + sys.argv[3] + ", " + sys.argv[4] + " wearing " + sys.argv[5] + ", " + assistant_message,
+        "prompt": "face close-up, SFW, " + sys.argv[1] + ", " + sys.argv[2] + ", " + sys.argv[3] + ", " + sys.argv[4] + direct_prompt + assistant_message,
         "negative_prompt": "",
         "seed": -1,
         "steps": 20,

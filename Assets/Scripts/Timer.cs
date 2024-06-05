@@ -7,12 +7,8 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    private static readonly Time instance = new Time();
+    public static Timer Instance { get; private set; }
 
-    public static Time Instance
-    {
-        get { return instance; }
-    }
     int day;
     int month;
     int year;
@@ -80,6 +76,10 @@ public class Timer : MonoBehaviour
 
     void Awake()
     {
+        if (Instance != null && Instance != this)
+            Destroy(this);
+        else
+            Instance = this;
 
         day = 1;
         month = 1;
