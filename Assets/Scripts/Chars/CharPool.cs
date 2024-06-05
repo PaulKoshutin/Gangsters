@@ -21,7 +21,7 @@ public class CharPool : MonoBehaviour
     private string charName;
     private string type;
     private District district;
-    private Org org;
+    private string org;
     private string background;
     private string race;
     private string gender;
@@ -38,6 +38,20 @@ public class CharPool : MonoBehaviour
 
     private void Start()
     {
+        if (!SaveLoader.Instance.loading)     
+        {
+            for (int i = 0; i < 3; i++)
+                listToGen.Add(new CharsToGen("gangster", ActiveEntities.Instance.districts[i], ActiveEntities.Instance.orgs[i].name, 1));
+
+            foreach (District d in ActiveEntities.Instance.districts)
+                foreach (string t in new List<string>() { "businessman", "policeman" })
+                    listToGen.Add(new CharsToGen(t, d, "", 1));
+        }
+
+        generationIsDone = true;
+
+
+        /*
         foreach (District d in ActiveEntities.Instance.districts)
             foreach (string t in new List<string>() { "gangster", "businessman", "policeman" })
                 if (t == "gangster")
@@ -45,16 +59,15 @@ public class CharPool : MonoBehaviour
                         listToGen.Add(new CharsToGen(t, d, o, 1));
                 else
                     listToGen.Add(new CharsToGen(t, d, null, 1));
-
-        generationIsDone = true;
+        */
     }
 
-    private Char GetCharFromPool(string type, District district, Org org = null)
+    private Char GetCharFromPool(string type, District district, string org="")
     {
         AddToList(type, district, org);
         foreach (Char c in pool) 
         {
-            if (c.type == type && c.district == district && c.org == org)
+            if (c.type == type && c.district == district.name && c.org == org)
             {  
                 pool.Remove(c);
                 return c; 
@@ -86,7 +99,7 @@ public class CharPool : MonoBehaviour
         }
     }
 
-    private void AddToList(string type, District district, Org org = null)
+    private void AddToList(string type, District district, string org)
     {
         foreach(CharsToGen c in listToGen)
         {
@@ -97,7 +110,7 @@ public class CharPool : MonoBehaviour
             }
         }
     }
-    private void RemoveFromList(string type, District district, Org org = null)
+    private void RemoveFromList(string type, District district, string org)
     {
         foreach (CharsToGen c in listToGen)
         {
@@ -109,14 +122,12 @@ public class CharPool : MonoBehaviour
         }
     }
     
-    private async void GenerateChar(string type, District district, Org org = null)
+    private async void GenerateChar(string type, District district, string org)
     {
         GetCharData(type, district, org);
         Task task = new Task(StartWorking);
         task.Start();
-        if (org is null)
-            Debug.Log("My exe file is running right now type:"+type+", district:"+district.name+", org:None");
-        else Debug.Log("My exe file is running right now type:" + type + ", district:" + district.name + ", org:"+org.name);
+        Debug.Log("My exe file is running right now type:" + type + ", district:" + district.name + ", org:"+org);
         await task;
     }
     public void StartWorking()
@@ -154,16 +165,16 @@ public class CharPool : MonoBehaviour
 
         generationIsDone = true;
     }
-    private void GetCharData(string type, District district, Org org = null)
+    private void GetCharData(string type, District district, string org)
     {
         this.type = type;
         this.district = district;
         this.org = org;
-        if (org == null && type == "policeman")
+        if (org == "" && type == "policeman")
             orgFeature = "blue";
-        else if (org == null)
+        else if (org == "")
             orgFeature = "";
-        else { orgFeature = org.orgFeature; }
+        else { orgFeature = ActiveEntities.Instance.GetOrg(org).orgFeature; }
         if (UnityEngine.Random.Range(0, 100) <= district.overall_wealth)
             background = "rich";
         else background = "poor";
@@ -208,9 +219,10 @@ public class CharPool : MonoBehaviour
         if (type == "businessman")
             wealth = (UnityEngine.Random.Range(10, 100) + UnityEngine.Random.Range(5, district.overall_wealth)) * 2;
 
-        c.SetData(type, district, org, name, c.LoadNewSprite("Images/" + charName + ".png"), mental, social, physical, hiring_price, wealth);
+        c.SetData(type, district.name, org, charName, c.LoadNewSprite("Images/" + charName + ".png"), mental, social, physical, hiring_price, wealth);
 
         pool.Add(c);
+        charName = null;
     }
 
     [Serializable]
@@ -218,10 +230,10 @@ public class CharPool : MonoBehaviour
     {
         public string type;
         public District district;
-        public Org org;
+        public string org;
         public int num;
 
-        public CharsToGen(string type, District district, Org org, int num)
+        public CharsToGen(string type, District district, string org, int num)
         {
             this.type = type;
             this.district = district;

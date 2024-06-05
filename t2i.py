@@ -6,6 +6,7 @@ import time
 import os
 import requests
 import sys
+import time
 
 webui_server_url = 'http://127.0.0.1:7860'
 text_url = "http://127.0.0.1:5000/v1/chat/completions"

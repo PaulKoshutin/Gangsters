@@ -71,6 +71,7 @@
     <Compile Include="Assets\Scripts\UI\DraggableItem.cs" />
     <Compile Include="Assets\Scripts\Strategy.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
+    <Compile Include="Assets\Scripts\UI\IntroButtons.cs" />
     <Compile Include="Assets\Scripts\SaveLoader.cs" />
     <Compile Include="Assets\Scripts\Chars\OrgComponent.cs" />
     <Compile Include="Assets\Scripts\District.cs" />

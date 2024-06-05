@@ -7,13 +7,13 @@ using UnityEngine.U2D;
 using UnityEngine.UI;
 
 [Serializable]
-public class Char : OrgComponent
+public class Char : OrgComponent, ISerializationCallbackReceiver
 {
     public string type;
     public string name;
     public Sprite image;
-    public District district;
-    public Org org;
+    public string district;
+    public string org;
 
     public int mental;
     public int social;
@@ -24,7 +24,7 @@ public class Char : OrgComponent
     public int wealth;
 
     public Char() { }
-    public void SetData(string type, District district, Org org, string name, Sprite image, int mental, int social, int physical, int hiring_price, int wealth)
+    public void SetData(string type, string district, string org, string name, Sprite image, int mental, int social, int physical, int hiring_price, int wealth)
     {
         this.type = type;
         this.district = district;
@@ -73,6 +73,10 @@ public class Char : OrgComponent
     }
     public void OnAfterDeserialize()
     {
-        this.LoadNewSprite("Images/" + name + ".png");
+        image = this.LoadNewSprite("Images/" + name + ".png");
+    }
+
+    public void OnBeforeSerialize()
+    {
     }
 }
