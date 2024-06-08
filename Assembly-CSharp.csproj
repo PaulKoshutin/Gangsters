@@ -73,7 +73,11 @@
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\UI\IntroButtons.cs" />
     <Compile Include="Assets\Scripts\SaveLoader.cs" />
+    <Compile Include="Assets\Scripts\UI\NewGameUI.cs" />
+    <Compile Include="Assets\Scripts\Generator.cs" />
+    <Compile Include="Assets\Scripts\Facade.cs" />
     <Compile Include="Assets\Scripts\Chars\OrgComponent.cs" />
+    <Compile Include="Assets\Scripts\Utils.cs" />
     <Compile Include="Assets\Scripts\District.cs" />
   </ItemGroup>
   <ItemGroup>

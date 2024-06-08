@@ -10587,6 +10587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0914b7a2c090d74dae2fbf476a5fcfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  orgs: []
+  districts: []
 --- !u!4 &1301863994
 Transform:
   m_ObjectHideFlags: 0

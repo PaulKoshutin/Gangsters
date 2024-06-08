@@ -22,13 +22,14 @@ public class ActiveEntities : MonoBehaviour
 
         if (!SaveLoader.Instance.loading)
         {
+            orgs.Add(Generator.Instance.o);
             orgs.Add(new("Slummers", "green", 500));
             orgs.Add(new("Hammers", "red", 1000));
             orgs.Add(new("Suits", "black", 2000));
 
-            districts.Add(new("Northslum", new List<int>() { 20, 40, 5, 25, 5, 5 }, 20, 50, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0) }));
-            districts.Add(new("Eastmouth", new List<int>() { 40, 20, 10, 20, 5, 5 }, 50, 80, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0) }));
-            districts.Add(new("Westboro", new List<int>() { 50, 5, 20, 5, 10, 10 }, 80, 100, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0) }));
+            districts.Add(new("Northslum", new List<int>() { 20, 40, 5, 25, 5, 5 }, 5, 20, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0), new OrgValuePair(orgs[3], 0) }));
+            districts.Add(new("Eastmouth", new List<int>() { 40, 20, 10, 20, 5, 5 }, 10, 40, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0), new OrgValuePair(orgs[3], 0) }));
+            districts.Add(new("Westboro", new List<int>() { 50, 5, 20, 5, 10, 10 }, 20, 80, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0), new OrgValuePair(orgs[3], 0) }));
         }
     }
     public Org GetOrg(string name)

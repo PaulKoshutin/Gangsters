@@ -18,16 +18,6 @@ public class CharPool : MonoBehaviour
     [SerializeField]
     private List<CharsToGen> listToGen = new List<CharsToGen>();
 
-    private string charName;
-    private string type;
-    private District district;
-    private string org;
-    private string background;
-    private string race;
-    private string gender;
-    private string orgFeature;
-    private Sprite image;
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -41,11 +31,11 @@ public class CharPool : MonoBehaviour
         if (!SaveLoader.Instance.loading)     
         {
             for (int i = 0; i < 3; i++)
-                listToGen.Add(new CharsToGen("gangster", ActiveEntities.Instance.districts[i], ActiveEntities.Instance.orgs[i].name, 1));
+                listToGen.Add(new CharsToGen("gangster", ActiveEntities.Instance.districts[i].name, ActiveEntities.Instance.orgs[i].name, 1));
 
             foreach (District d in ActiveEntities.Instance.districts)
                 foreach (string t in new List<string>() { "businessman", "policeman" })
-                    listToGen.Add(new CharsToGen(t, d, "", 1));
+                    listToGen.Add(new CharsToGen(t, d.name, "", 1));
         }
 
         generationIsDone = true;
@@ -62,12 +52,12 @@ public class CharPool : MonoBehaviour
         */
     }
 
-    private Char GetCharFromPool(string type, District district, string org="")
+    private Char GetCharFromPool(string type, string district, string org="")
     {
         AddToList(type, district, org);
         foreach (Char c in pool) 
         {
-            if (c.type == type && c.district == district.name && c.org == org)
+            if (c.type == type && c.district == district && c.org == org)
             {  
                 pool.Remove(c);
                 return c; 
@@ -79,27 +69,33 @@ public class CharPool : MonoBehaviour
         pool.Remove(ch);
         return ch;
     }
+    public void AddCharToPool(Char c)
+    {
+        pool.Add(c);
+        generationIsDone = true;
+    }
+
     void Update()
     {
         if (generationIsDone)
         {
-            if (charName != null)
-            {
-                RemoveFromList(type, district, org);
-                FinishChar();
-            }
             foreach (CharsToGen c in listToGen)
             {
                 if (c.num > 0)
                 {
+                    generationIsDone = false;
                     GenerateChar(c.type, c.district, c.org);
                     break;
                 }
             }
         }
     }
+    private void GenerateChar(string type, string district, string org)
+    {
+        Generator.Instance.GenerateChar(type, district, org); 
+    }
 
-    private void AddToList(string type, District district, string org)
+    private void AddToList(string type, string district, string org)
     {
         foreach(CharsToGen c in listToGen)
         {
@@ -110,7 +106,7 @@ public class CharPool : MonoBehaviour
             }
         }
     }
-    private void RemoveFromList(string type, District district, string org)
+    public void RemoveFromList(string type, string district, string org)
     {
         foreach (CharsToGen c in listToGen)
         {
@@ -121,119 +117,15 @@ public class CharPool : MonoBehaviour
             }
         }
     }
-    
-    private async void GenerateChar(string type, District district, string org)
-    {
-        GetCharData(type, district, org);
-        Task task = new Task(StartWorking);
-        task.Start();
-        Debug.Log("My exe file is running right now type:" + type + ", district:" + district.name + ", org:"+org);
-        await task;
-    }
-    public void StartWorking()
-    {
-        generationIsDone = false;
-
-        Process p = new Process();
-        if (orgFeature != "")
-            p.StartInfo = new ProcessStartInfo("python.exe", "t2i.py " + background + " " + race + " " + gender + " " + type + " " + orgFeature)
-            {
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-        else
-            p.StartInfo = new ProcessStartInfo("python.exe", "t2i.py " + background + " " + race + " " + gender + " " + type)
-            {
-                RedirectStandardOutput = true,
-                UseShellExecute = false,
-                CreateNoWindow = true
-            };
-        p.Start();
-
-        string name = p.StandardOutput.ReadLine();
-        string output = p.StandardOutput.ReadToEnd();
-        p.WaitForExit();
-
-        Debug.Log(name);
-        Debug.Log(output);
-
-        if (name == null || output == "")
-            charName = null;
-        else
-            charName = name;
-
-        generationIsDone = true;
-    }
-    private void GetCharData(string type, District district, string org)
-    {
-        this.type = type;
-        this.district = district;
-        this.org = org;
-        if (org == "" && type == "policeman")
-            orgFeature = "blue";
-        else if (org == "")
-            orgFeature = "";
-        else { orgFeature = ActiveEntities.Instance.GetOrg(org).orgFeature; }
-        if (UnityEngine.Random.Range(0, 100) <= district.overall_wealth)
-            background = "rich";
-        else background = "poor";
-        if (UnityEngine.Random.Range(0, 100) <= 80)
-            gender = "male";
-        int raceRoll = UnityEngine.Random.Range(0, 100);
-        int raceSum = 0;
-        for (int i = 0; i < district.racial_distribution.Count; i++)
-        {
-            if (raceRoll <= district.racial_distribution[i].val + raceSum)
-            {
-                race = district.racial_distribution[i].key;
-                break;
-            }
-            else
-                raceSum += district.racial_distribution[i].val;
-        }
-    }
-    private void FinishChar()
-    {
-        Char c = new Char();
-
-        int mental = UnityEngine.Random.Range(10, 100);
-        if (background == "rich")
-            mental += UnityEngine.Random.Range(5, 20);
-        if (mental > 100)
-            mental = 100;
-
-        int social = UnityEngine.Random.Range(10, 100);
-
-        int physical = UnityEngine.Random.Range(10, 100);
-        if (background == "poor")
-            physical += UnityEngine.Random.Range(5, 20);
-        if (physical > 100)
-            physical = 100;
-
-        int hiring_price = 0;
-        if (type == "gangster")
-            hiring_price = mental + social + physical;
-
-        int wealth = 0;
-        if (type == "businessman")
-            wealth = (UnityEngine.Random.Range(10, 100) + UnityEngine.Random.Range(5, district.overall_wealth)) * 2;
-
-        c.SetData(type, district.name, org, charName, c.LoadNewSprite("Images/" + charName + ".png"), mental, social, physical, hiring_price, wealth);
-
-        pool.Add(c);
-        charName = null;
-    }
-
     [Serializable]
     private class CharsToGen
     {
         public string type;
-        public District district;
+        public string district;
         public string org;
         public int num;
 
-        public CharsToGen(string type, District district, string org, int num)
+        public CharsToGen(string type, string district, string org, int num)
         {
             this.type = type;
             this.district = district;

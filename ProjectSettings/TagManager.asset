@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - District
+  - New Org Image
+  - New Char Image
   layers:
   - Default
   - TransparentFX
