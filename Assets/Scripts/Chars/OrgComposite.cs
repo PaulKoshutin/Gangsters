@@ -10,11 +10,13 @@ public class OrgComposite : OrgComponent
 {
     private string officeName;
     public bool squadLeader;
+    public bool solo;
     public List<OrgComponent> subordinates = new List<OrgComponent>();
     private void Awake()
     {
         officeName = "Leutenant";
         squadLeader = false;
+        solo = false;
     }
 
     public override void Add(OrgComponent comp)

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,7 +11,7 @@ public class DraggableChar : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     public Transform parentAfterDrag;
     public Char c;
 
-    private void Start()
+    private void Awake()
     {
         image = GetComponent<Image>();
         group = GetComponent<CanvasGroup>();
@@ -38,13 +37,6 @@ public class DraggableChar : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         transform.SetParent(parentAfterDrag);
 
-        if (parentAfterDrag.gameObject.GetComponent<OrgComponent>().superior != null)
-            c.superior = parentAfterDrag.gameObject.GetComponent<OrgComponent>().superior.officeholder.name;
-        if (parentAfterDrag.gameObject.GetComponent<OrgComposite>().subordinates != null)
-            foreach (OrgComponent oc in parentAfterDrag.gameObject.GetComponent<OrgComposite>().subordinates)
-                c.subordinates.Add(oc.officeholder.name);
-        parentAfterDrag.gameObject.GetComponent<OrgComponent>().officeholder = c;
-
         group.alpha = 1f;
         image.raycastTarget = true;
     }
@@ -53,8 +45,22 @@ public class DraggableChar : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
         this.c = c;
         this.image.sprite = c.image;
     }
+    public void Fire()
+    {
+        c.Fire();
+        transform.parent.GetComponent<OrgComponent>().superior.officeholder.subordinates.Remove(c.name);
+        if (transform.parent.name == "CharSlotMain")
+            foreach (OrgComponent sub in transform.parent.GetComponent<OrgComposite>().subordinates)
+                sub.officeholder.superior = "";
+        transform.parent.GetComponent<OrgComponent>().officeholder = null;
+        Destroy(gameObject);
+    }
     private void ShowOnLeftPanel(Char c)
     {
         LeftPanel.Instance.Char(c);
+    }
+    private void OnEnable()
+    {
+        this.image.sprite = c.image;
     }
 }

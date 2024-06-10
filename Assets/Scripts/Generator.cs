@@ -115,10 +115,7 @@ public class Generator : MonoBehaviour
 
         if (name == null || output == "")
         {
-            if (!manual)
-                GenerateChar(type, districtName, orgName);
-            else
-                GenerateChar("gangster", "Northslum", orgName);
+            CharPool.Instance.AddCharToPool();
         }
         else
         {
@@ -148,7 +145,7 @@ public class Generator : MonoBehaviour
         else if (wealthRoll <= district.wealth * 3)
             background = "middle-class";
         else background = "poor";
-        if (Random.Range(0, 100) <= 80)
+        if (Random.Range(0, 100) <= 90)
             gender = "male";
         else
             gender = "female";
@@ -202,13 +199,13 @@ public class Generator : MonoBehaviour
         if (background == "rich")
             pay += Random.Range(100, 400);
 
-        c = new (type, districtName, orgName, charName, Utils.Instance.LoadNewSprite("Images/" + charName + ".png"), mental, social, physical, pay);
+        c = new (type, districtName, orgName, charName, Utils.Instance.LoadNewSprite("Images/" + charName + ".png"), mental, social, physical, pay, false, manual);
 
         if (!manual)
             CharPool.Instance.AddCharToPool(c);
         else
         {
-            o.leader = c;
+            o.AddToActive(c);
             GameObject.FindGameObjectWithTag("New Char Image").GetComponent<Image>().sprite = Utils.Instance.LoadNewSprite("Images/" + charName + ".png");
         }
         charName = "";

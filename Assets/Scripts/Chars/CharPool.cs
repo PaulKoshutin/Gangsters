@@ -30,15 +30,15 @@ public class CharPool : MonoBehaviour
     {
         if (!SaveLoader.Instance.loading)     
         {
+            foreach (District d in ActiveEntities.Instance.districts)
+                listToGen.Add(new CharsToGen("gangster", d.name, ActiveEntities.Instance.orgs[0].name, 1));
+
             for (int i = 1; i < ActiveEntities.Instance.orgs.Count; i++)
                 listToGen.Add(new CharsToGen("gangster", ActiveEntities.Instance.districts[i-1].name, ActiveEntities.Instance.orgs[i].name, 1));
 
             foreach (District d in ActiveEntities.Instance.districts)
                 foreach (string t in new List<string>() { "businessman", "policeman" })
                     listToGen.Add(new CharsToGen(t, d.name, "", 1));
-
-            foreach (District d in ActiveEntities.Instance.districts)
-                listToGen.Add(new CharsToGen("gangster", d.name, ActiveEntities.Instance.orgs[0].name, 1));
         }
 
         generationIsDone = true;
@@ -55,26 +55,23 @@ public class CharPool : MonoBehaviour
         */
     }
 
-    private Char GetCharFromPool(string type, string district, string org="")
+    public Char GetCharFromPool(string type, string district, string org="")
     {
-        AddToList(type, district, org);
         foreach (Char c in pool) 
         {
             if (c.type == type && c.district == district && c.org == org)
             {  
                 pool.Remove(c);
+                AddToList(type, district, org);
                 return c; 
             }
         }
-
-        GenerateChar(type, district, org);
-        Char ch = pool[-1];
-        pool.Remove(ch);
-        return ch;
+        return null;
     }
-    public void AddCharToPool(Char c)
+    public void AddCharToPool(Char c=null)
     {
-        pool.Add(c);
+        if (c != null)
+            pool.Add(c);
         generationIsDone = true;
     }
 

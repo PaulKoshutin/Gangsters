@@ -3,7 +3,7 @@ Shader "TextMeshPro/Sprite"
 	Properties
 	{
         [PerRendererData] _MainTex ("Sprite Texture", 2D) = "white" {}
-		_color ("Tint", color) = (1,1,1,1)
+		_Color ("Tint", Color) = (1,1,1,1)
 		
 		_StencilComp ("Stencil Comparison", Float) = 8
 		_Stencil ("Stencil ID", Float) = 0
@@ -12,7 +12,7 @@ Shader "TextMeshPro/Sprite"
 		_StencilReadMask ("Stencil Read Mask", Float) = 255
 		
 		_CullMode ("Cull Mode", Float) = 0
-		_colorMask ("color Mask", Float) = 15
+		_ColorMask ("Color Mask", Float) = 15
 		_ClipRect ("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
 
 		[Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
@@ -43,7 +43,7 @@ Shader "TextMeshPro/Sprite"
 		ZWrite Off
 		ZTest [unity_GUIZTestMode]
 		Blend SrcAlpha OneMinusSrcAlpha
-		colorMask [_colorMask]
+		ColorMask [_ColorMask]
 
 		Pass
 		{
@@ -62,7 +62,7 @@ Shader "TextMeshPro/Sprite"
 			struct appdata_t
 			{
 				float4 vertex   : POSITION;
-				float4 color    : color;
+				float4 color    : COLOR;
 				float2 texcoord : TEXCOORD0;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
 			};
@@ -70,14 +70,14 @@ Shader "TextMeshPro/Sprite"
 			struct v2f
 			{
 				float4 vertex   : SV_POSITION;
-				fixed4 color    : color;
+				fixed4 color    : COLOR;
                 float2 texcoord  : TEXCOORD0;
 				float4 worldPosition : TEXCOORD1;
                 UNITY_VERTEX_OUTPUT_STEREO
 			};
 			
             sampler2D _MainTex;
-			fixed4 _color;
+			fixed4 _Color;
 			fixed4 _TextureSampleAdd;
 			float4 _ClipRect;
             float4 _MainTex_ST;
@@ -92,7 +92,7 @@ Shader "TextMeshPro/Sprite"
 
                 OUT.texcoord = TRANSFORM_TEX(v.texcoord, _MainTex);
 				
-                OUT.color = v.color * _color;
+                OUT.color = v.color * _Color;
 				return OUT;
 			}
 

@@ -5,7 +5,7 @@ using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 [Serializable]
-public class District
+public class District : ISerializationCallbackReceiver
 {
     public string name;
     public Sprite view;
@@ -33,6 +33,17 @@ public class District
             output += "\n" + pair.org.name +": "+ pair.val;
         }
         return output;
+    }
+    public void OnAfterDeserialize()
+    {
+        try
+        {
+            this.view = Resources.Load("Sprites/" + name, typeof(Sprite)) as Sprite;
+        }
+        catch { }
+    }
+    public void OnBeforeSerialize()
+    {
     }
 }
 

@@ -26,7 +26,7 @@ public class TopButtons : MonoBehaviour
     }
     void go(bool a=false, bool b = false, bool c = false)
     {
-        transform.Find("Event Panel").gameObject.SetActive(false);
+        transform.Find("Order Panel").gameObject.SetActive(false);
         transform.Find("Gang Panel").gameObject.SetActive(a);
         transform.Find("Char Panel").gameObject.SetActive(b);
         transform.Find("City Panel").gameObject.SetActive(c);
