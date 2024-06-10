@@ -3,7 +3,7 @@ Shader "TextMeshPro/Bitmap Custom Atlas" {
 Properties {
 	_MainTex		("Font Atlas", 2D) = "white" {}
 	_FaceTex		("Font Texture", 2D) = "white" {}
-	[HDR]_FaceColor	("Text Color", Color) = (1,1,1,1)
+	[HDR]_Facecolor	("Text color", color) = (1,1,1,1)
 
 	_VertexOffsetX	("Vertex OffsetX", float) = 0
 	_VertexOffsetY	("Vertex OffsetY", float) = 0
@@ -20,7 +20,7 @@ Properties {
 	_StencilReadMask("Stencil Read Mask", Float) = 255
 
 	_CullMode("Cull Mode", Float) = 0
-	_ColorMask("Color Mask", Float) = 15
+	_colorMask("color Mask", Float) = 15
 }
 
 SubShader{
@@ -43,7 +43,7 @@ SubShader{
 	ZWrite Off
 	Fog { Mode Off }
 	Blend SrcAlpha OneMinusSrcAlpha
-	ColorMask[_ColorMask]
+	colorMask[_colorMask]
 
 	Pass {
 		CGPROGRAM
@@ -58,14 +58,14 @@ SubShader{
 
 		struct appdata_t {
 			float4 vertex		: POSITION;
-			fixed4 color		: COLOR;
+			fixed4 color		: color;
 			float2 texcoord0	: TEXCOORD0;
 			float2 texcoord1	: TEXCOORD1;
 		};
 
 		struct v2f {
 			float4	vertex		: SV_POSITION;
-			fixed4	color		: COLOR;
+			fixed4	color		: color;
 			float2	texcoord0	: TEXCOORD0;
 			float2	texcoord1	: TEXCOORD1;
 			float4	mask		: TEXCOORD2;
@@ -74,7 +74,7 @@ SubShader{
 		uniform	sampler2D 	_MainTex;
 		uniform	sampler2D 	_FaceTex;
 		uniform float4		_FaceTex_ST;
-		uniform	fixed4		_FaceColor;
+		uniform	fixed4		_Facecolor;
 
 		uniform float		_VertexOffsetX;
 		uniform float		_VertexOffsetY;
@@ -101,12 +101,12 @@ SubShader{
 
 			float4 vPosition = UnityPixelSnap(UnityObjectToClipPos(vert));
 
-			fixed4 faceColor = v.color;
-			faceColor *= _FaceColor;
+			fixed4 facecolor = v.color;
+			facecolor *= _Facecolor;
 
 			v2f OUT;
 			OUT.vertex = vPosition;
-			OUT.color = faceColor;
+			OUT.color = facecolor;
 			OUT.texcoord0 = v.texcoord0;
 			OUT.texcoord1 = TRANSFORM_TEX(UnpackUV(v.texcoord1), _FaceTex);
 			float2 pixelSize = vPosition.w;

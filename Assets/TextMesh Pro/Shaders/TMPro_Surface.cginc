@@ -48,15 +48,15 @@ void PixShader(Input input, inout SurfaceOutput o)
 	float outline = _OutlineWidth*_ScaleRatioA * scale;
 	float softness = _OutlineSoftness*_ScaleRatioA * scale;
 
-	// Color & Alpha
-	float4 faceColor = _FaceColor;
-	float4 outlineColor = _OutlineColor;
-	faceColor *= input.color;
-	outlineColor.a *= input.color.a;
-	faceColor *= tex2D(_FaceTex, float2(input.uv2_FaceTex.x + _FaceUVSpeedX * _Time.y, input.uv2_FaceTex.y + _FaceUVSpeedY * _Time.y));
-	outlineColor *= tex2D(_OutlineTex, float2(input.uv2_OutlineTex.x + _OutlineUVSpeedX * _Time.y, input.uv2_OutlineTex.y + _OutlineUVSpeedY * _Time.y));
-	faceColor = GetColor(sd, faceColor, outlineColor, outline, softness);
-	faceColor.rgb /= max(faceColor.a, 0.0001);
+	// color & Alpha
+	float4 facecolor = _Facecolor;
+	float4 outlinecolor = _Outlinecolor;
+	facecolor *= input.color;
+	outlinecolor.a *= input.color.a;
+	facecolor *= tex2D(_FaceTex, float2(input.uv2_FaceTex.x + _FaceUVSpeedX * _Time.y, input.uv2_FaceTex.y + _FaceUVSpeedY * _Time.y));
+	outlinecolor *= tex2D(_OutlineTex, float2(input.uv2_OutlineTex.x + _OutlineUVSpeedX * _Time.y, input.uv2_OutlineTex.y + _OutlineUVSpeedY * _Time.y));
+	facecolor = Getcolor(sd, facecolor, outlinecolor, outline, softness);
+	facecolor.rgb /= max(facecolor.a, 0.0001);
 
 #if BEVEL_ON
 	float3 delta = float3(1.0 / _TextureWidth, 1.0 / _TextureHeight, 0.0);
@@ -72,30 +72,30 @@ void PixShader(Input input, inout SurfaceOutput o)
 	// Bumpmap
 	float3 bump = UnpackNormal(tex2D(_BumpMap, input.uv2_FaceTex.xy)).xyz;
 	bump *= lerp(_BumpFace, _BumpOutline, saturate(sd + outline * 0.5));
-	bump = lerp(float3(0, 0, 1), bump, faceColor.a);
+	bump = lerp(float3(0, 0, 1), bump, facecolor.a);
 	n = normalize(n - bump);
 
 	// Cubemap reflection
 	fixed4 reflcol = texCUBE(_Cube, reflect(input.viewDirEnv, mul((float3x3)unity_ObjectToWorld, n)));
-	float3 emission = reflcol.rgb * lerp(_ReflectFaceColor.rgb, _ReflectOutlineColor.rgb, saturate(sd + outline * 0.5)) * faceColor.a;
+	float3 emission = reflcol.rgb * lerp(_ReflectFacecolor.rgb, _ReflectOutlinecolor.rgb, saturate(sd + outline * 0.5)) * facecolor.a;
 #else
 	float3 n = float3(0, 0, -1);
 	float3 emission = float3(0, 0, 0);
 #endif
 	
 #if GLOW_ON
-	float4 glowColor = GetGlowColor(sd, scale);
-	glowColor.a *= input.color.a;
-	emission += glowColor.rgb*glowColor.a;
-	faceColor = BlendARGB(glowColor, faceColor);
-	faceColor.rgb /= max(faceColor.a, 0.0001);
+	float4 glowcolor = GetGlowcolor(sd, scale);
+	glowcolor.a *= input.color.a;
+	emission += glowcolor.rgb*glowcolor.a;
+	facecolor = BlendARGB(glowcolor, facecolor);
+	facecolor.rgb /= max(facecolor.a, 0.0001);
 #endif
 
 	// Set Standard output structure
-	o.Albedo = faceColor.rgb;
+	o.Albedo = facecolor.rgb;
 	o.Normal = -n;
 	o.Emission = emission;
 	o.Specular = lerp(_FaceShininess, _OutlineShininess, saturate(sd + outline * 0.5));
 	o.Gloss = 1;
-	o.Alpha = faceColor.a;
+	o.Alpha = facecolor.a;
 }

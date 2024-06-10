@@ -21,6 +21,6 @@ public class Facade : MonoBehaviour
     }
     public void GenerateCharManually(string background, string race, string gender, string color, string charName, string orgName)
     {
-        Generator.Instance.GenerateCharManually(background,race,gender,color, charName, orgName);
+        Generator.Instance.GenerateChar("gangster", "Northslum", orgName, true, background,race,gender,color, charName);
     }
 }

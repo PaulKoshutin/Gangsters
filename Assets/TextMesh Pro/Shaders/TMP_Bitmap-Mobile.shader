@@ -2,7 +2,7 @@ Shader "TextMeshPro/Mobile/Bitmap" {
 
 Properties {
 	_MainTex		("Font Atlas", 2D) = "white" {}
-	[HDR]_Color		("Text Color", Color) = (1,1,1,1)
+	[HDR]_color		("Text color", color) = (1,1,1,1)
 	_DiffusePower	("Diffuse Power", Range(1.0,4.0)) = 1.0
 
 	_VertexOffsetX("Vertex OffsetX", float) = 0
@@ -19,7 +19,7 @@ Properties {
 	_StencilReadMask("Stencil Read Mask", Float) = 255
 
 	_CullMode("Cull Mode", Float) = 0
-	_ColorMask("Color Mask", Float) = 15
+	_colorMask("color Mask", Float) = 15
 }
 
 SubShader {
@@ -42,7 +42,7 @@ SubShader {
 	ZWrite Off
 	Fog { Mode Off }
 	Blend SrcAlpha OneMinusSrcAlpha
-	ColorMask[_ColorMask]
+	colorMask[_colorMask]
 
 	Pass {
 		CGPROGRAM
@@ -58,20 +58,20 @@ SubShader {
 
 		struct appdata_t {
 			float4 vertex : POSITION;
-			fixed4 color : COLOR;
+			fixed4 color : color;
 			float2 texcoord0 : TEXCOORD0;
 			float2 texcoord1 : TEXCOORD1;
 		};
 
 		struct v2f {
 			float4 vertex		: POSITION;
-			fixed4 color		: COLOR;
+			fixed4 color		: color;
 			float2 texcoord0	: TEXCOORD0;
 			float4 mask			: TEXCOORD2;
 		};
 
 		sampler2D 	_MainTex;
-		fixed4		_Color;
+		fixed4		_color;
 		float		_DiffusePower;
 
 		uniform float		_VertexOffsetX;
@@ -91,7 +91,7 @@ SubShader {
 
 			OUT.vertex = UnityPixelSnap(UnityObjectToClipPos(vert));
 			OUT.color = v.color;
-			OUT.color *= _Color;
+			OUT.color *= _color;
 			OUT.color.rgb *= _DiffusePower;
 			OUT.texcoord0 = v.texcoord0;
 
@@ -105,7 +105,7 @@ SubShader {
 			return OUT;
 		}
 
-		fixed4 frag (v2f IN) : COLOR
+		fixed4 frag (v2f IN) : color
 		{
 			fixed4 color = fixed4(IN.color.rgb, IN.color.a * tex2D(_MainTex, IN.texcoord0).a);
 
@@ -130,13 +130,13 @@ SubShader {
 	Lighting Off Cull Off ZTest Always ZWrite Off Fog { Mode Off }
 	Blend SrcAlpha OneMinusSrcAlpha
 	BindChannels {
-		Bind "Color", color
+		Bind "color", color
 		Bind "Vertex", vertex
 		Bind "TexCoord", texcoord0
 	}
 	Pass {
 		SetTexture [_MainTex] {
-			constantColor [_Color] combine constant * primary, constant * texture
+			constantcolor [_color] combine constant * primary, constant * texture
 		}
 	}
 }

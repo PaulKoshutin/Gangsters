@@ -30,12 +30,15 @@ public class CharPool : MonoBehaviour
     {
         if (!SaveLoader.Instance.loading)     
         {
-            for (int i = 0; i < 3; i++)
-                listToGen.Add(new CharsToGen("gangster", ActiveEntities.Instance.districts[i].name, ActiveEntities.Instance.orgs[i].name, 1));
+            for (int i = 1; i < ActiveEntities.Instance.orgs.Count; i++)
+                listToGen.Add(new CharsToGen("gangster", ActiveEntities.Instance.districts[i-1].name, ActiveEntities.Instance.orgs[i].name, 1));
 
             foreach (District d in ActiveEntities.Instance.districts)
                 foreach (string t in new List<string>() { "businessman", "policeman" })
                     listToGen.Add(new CharsToGen(t, d.name, "", 1));
+
+            foreach (District d in ActiveEntities.Instance.districts)
+                listToGen.Add(new CharsToGen("gangster", d.name, ActiveEntities.Instance.orgs[0].name, 1));
         }
 
         generationIsDone = true;

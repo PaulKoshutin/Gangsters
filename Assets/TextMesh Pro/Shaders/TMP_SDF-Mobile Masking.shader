@@ -6,14 +6,14 @@
 Shader "TextMeshPro/Mobile/Distance Field - Masking" {
 
 Properties {
-	[HDR]_FaceColor		("Face Color", Color) = (1,1,1,1)
+	[HDR]_Facecolor		("Face color", color) = (1,1,1,1)
 	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
-	[HDR]_OutlineColor	("Outline Color", Color) = (0,0,0,1)
+	[HDR]_Outlinecolor	("Outline color", color) = (0,0,0,1)
 	_OutlineWidth		("Outline Thickness", Range(0,1)) = 0
 	_OutlineSoftness	("Outline Softness", Range(0,1)) = 0
 
-	[HDR]_UnderlayColor	("Border Color", Color) = (0,0,0,.5)
+	[HDR]_Underlaycolor	("Border color", color) = (0,0,0,.5)
 	_UnderlayOffsetX 	("Border OffsetX", Range(-1,1)) = 0
 	_UnderlayOffsetY 	("Border OffsetY", Range(-1,1)) = 0
 	_UnderlayDilate		("Border Dilate", Range(-1,1)) = 0
@@ -44,7 +44,7 @@ Properties {
 	_MaskSoftnessY		("Mask SoftnessY", float) = 0
 	_MaskTex			("Mask Texture", 2D) = "white" {}
 	_MaskInverse		("Inverse", float) = 0
-	_MaskEdgeColor		("Edge Color", Color) = (1,1,1,1)
+	_MaskEdgecolor		("Edge color", color) = (1,1,1,1)
 	_MaskEdgeSoftness	("Edge Softness", Range(0, 1)) = 0.01
 	_MaskWipeControl	("Wipe Position", Range(0, 1)) = 0.5
 
@@ -55,7 +55,7 @@ Properties {
 	_StencilReadMask	("Stencil Read Mask", Float) = 255
 
 	_CullMode			("Cull Mode", Float) = 0
-	_ColorMask			("Color Mask", Float) = 15
+	_colorMask			("color Mask", Float) = 15
 }
 
 SubShader {
@@ -82,7 +82,7 @@ SubShader {
 	Fog { Mode Off }
 	ZTest [unity_GUIZTestMode]
 	Blend One OneMinusSrcAlpha
-	ColorMask [_ColorMask]
+	colorMask [_colorMask]
 
 	Pass {
 		CGPROGRAM
@@ -102,15 +102,15 @@ SubShader {
 		struct vertex_t {
 			float4	vertex			: POSITION;
 			float3	normal			: NORMAL;
-			fixed4	color			: COLOR;
+			fixed4	color			: color;
 			float2	texcoord0		: TEXCOORD0;
 			float2	texcoord1		: TEXCOORD1;
 		};
 
 		struct pixel_t {
 			float4	vertex			: SV_POSITION;
-			fixed4	faceColor		: COLOR;
-			fixed4	outlineColor	: COLOR1;
+			fixed4	facecolor		: color;
+			fixed4	outlinecolor	: color1;
 			float4	texcoord0		: TEXCOORD0;			// Texture UV, Mask UV
 			half4	param			: TEXCOORD1;			// Scale(x), BiasIn(y), BiasOut(z), Bias(w)
 			half4	mask			: TEXCOORD2;			// Position in clip space(xy), Softness(zw)
@@ -122,7 +122,7 @@ SubShader {
 
 		float _MaskWipeControl;
 		float _MaskEdgeSoftness;
-		fixed4 _MaskEdgeColor;
+		fixed4 _MaskEdgecolor;
 		bool _MaskInverse;
 
 		pixel_t VertShader(vertex_t input)
@@ -155,13 +155,13 @@ SubShader {
 					opacity = 1.0;
 					#endif
 
-			fixed4 faceColor = fixed4(input.color.rgb, opacity) * _FaceColor;
-			faceColor.rgb *= faceColor.a;
+			fixed4 facecolor = fixed4(input.color.rgb, opacity) * _Facecolor;
+			facecolor.rgb *= facecolor.a;
 
-			fixed4 outlineColor = _OutlineColor;
-			outlineColor.a *= opacity;
-			outlineColor.rgb *= outlineColor.a;
-			outlineColor = lerp(faceColor, outlineColor, sqrt(min(1.0, (outline * 2))));
+			fixed4 outlinecolor = _Outlinecolor;
+			outlinecolor.a *= opacity;
+			outlinecolor.rgb *= outlinecolor.a;
+			outlinecolor = lerp(facecolor, outlinecolor, sqrt(min(1.0, (outline * 2))));
 
 		#if (UNDERLAY_ON | UNDERLAY_INNER)
 
@@ -180,8 +180,8 @@ SubShader {
 			// Structure for pixel shader
 			pixel_t output = {
 				vPosition,
-				faceColor,
-				outlineColor,
+				facecolor,
+				outlinecolor,
 				float4(input.texcoord0.x, input.texcoord0.y, maskUV.x, maskUV.y),
 				half4(scale, bias - outline, bias + outline, bias),
 				half4(vert.xy * 2 - clampedRect.xy - clampedRect.zw, 0.25 / (0.25 * half2(_MaskSoftnessX, _MaskSoftnessY) + pixelSize.xy)),
@@ -199,22 +199,22 @@ SubShader {
 		fixed4 PixShader(pixel_t input) : SV_Target
 		{
 			half d = tex2D(_MainTex, input.texcoord0.xy).a * input.param.x;
-			half4 c = input.faceColor * saturate(d - input.param.w);
+			half4 c = input.facecolor * saturate(d - input.param.w);
 
 		#ifdef OUTLINE_ON
-			c = lerp(input.outlineColor, input.faceColor, saturate(d - input.param.z));
+			c = lerp(input.outlinecolor, input.facecolor, saturate(d - input.param.z));
 			c *= saturate(d - input.param.y);
 		#endif
 
 		#if UNDERLAY_ON
 			d = tex2D(_MainTex, input.texcoord1.xy).a * input.underlayParam.x;
-			c += float4(_UnderlayColor.rgb * _UnderlayColor.a, _UnderlayColor.a) * saturate(d - input.underlayParam.y) * (1 - c.a);
+			c += float4(_Underlaycolor.rgb * _Underlaycolor.a, _Underlaycolor.a) * saturate(d - input.underlayParam.y) * (1 - c.a);
 		#endif
 
 		#if UNDERLAY_INNER
 			half sd = saturate(d - input.param.z);
 			d = tex2D(_MainTex, input.texcoord1.xy).a * input.underlayParam.x;
-			c += float4(_UnderlayColor.rgb * _UnderlayColor.a, _UnderlayColor.a) * (1 - saturate(d - input.underlayParam.y)) * sd * (1 - c.a);
+			c += float4(_Underlaycolor.rgb * _Underlaycolor.a, _Underlaycolor.a) * (1 - saturate(d - input.underlayParam.y)) * sd * (1 - c.a);
 		#endif
 
 		// Alternative implementation to UnityGet2DClipping with support for softness.
@@ -226,7 +226,7 @@ SubShader {
 		float a = abs(_MaskInverse - tex2D(_MaskTex, input.texcoord0.zw).a);
 		float t = a + (1 - _MaskWipeControl) * _MaskEdgeSoftness - _MaskWipeControl;
 		a = saturate(t / _MaskEdgeSoftness);
-		c.rgb = lerp(_MaskEdgeColor.rgb*c.a, c.rgb, a);
+		c.rgb = lerp(_MaskEdgecolor.rgb*c.a, c.rgb, a);
 		c *= a;
 
 		#if (UNDERLAY_ON | UNDERLAY_INNER)

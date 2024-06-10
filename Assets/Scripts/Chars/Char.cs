@@ -7,7 +7,7 @@ using UnityEngine.U2D;
 using UnityEngine.UI;
 
 [Serializable]
-public class Char : OrgComponent, ISerializationCallbackReceiver
+public class Char : ISerializationCallbackReceiver
 {
     public string type;
     public string name;
@@ -19,11 +19,14 @@ public class Char : OrgComponent, ISerializationCallbackReceiver
     public int social;
     public int physical;
 
-    public int upkeep;
+    public int pay;
 
-    public int wealth;
+    public bool squadLeader;
+    public string superior;
+    public List<string> subordinates;
 
-    public Char (string type, string district, string org, string name, Sprite image, int mental, int social, int physical, int upkeep, int wealth)
+
+    public Char (string type, string district, string org, string name, Sprite image, int mental, int social, int physical, int pay)
     {
         this.type = type;
         this.district = district;
@@ -34,19 +37,9 @@ public class Char : OrgComponent, ISerializationCallbackReceiver
         this.social = social;
         this.physical = physical;
 
-        this.upkeep = upkeep;
-        this.wealth = wealth;
-    }
+        this.pay = pay;
 
-
-    public override void Add(OrgComponent comp)
-    {
-        throw new NotImplementedException();
-    }
-
-    public override void Remove(OrgComponent comp)
-    {
-        throw new NotImplementedException();
+        squadLeader = false;
     }
     public void OnAfterDeserialize()
     {

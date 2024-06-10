@@ -23,18 +23,26 @@ public class ActiveEntities : MonoBehaviour
         if (!SaveLoader.Instance.loading)
         {
             orgs.Add(Generator.Instance.o);
-            orgs.Add(new("Slummers", "green", 500));
-            orgs.Add(new("Hammers", "red", 1000));
-            orgs.Add(new("Suits", "black", 2000));
+            orgs.Add(new("Slummers", "green_baseball_cap", 500));
+            orgs.Add(new("Hammers", "red_hair", 1000));
+            orgs.Add(new("Suits", "black_bowtie", 2000));
 
-            districts.Add(new("Northslum", new List<int>() { 20, 40, 5, 25, 5, 5 }, 5, 20, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0), new OrgValuePair(orgs[3], 0) }));
-            districts.Add(new("Eastmouth", new List<int>() { 40, 20, 10, 20, 5, 5 }, 10, 40, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0), new OrgValuePair(orgs[3], 0) }));
-            districts.Add(new("Westboro", new List<int>() { 50, 5, 20, 5, 10, 10 }, 20, 80, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0), new OrgValuePair(orgs[3], 0) }));
+            orgs[1].leader = new Char("gangster","Northslum", "Slummers", "James LeThrone", Resources.Load("Sprites/James LeThrone", typeof(Sprite)) as Sprite,40,60,80,0);
+            orgs[2].leader = new Char("gangster", "Eastmouth", "Hammers", "Lo Qian Ye", Resources.Load("Sprites/Lo Qian Ye", typeof(Sprite)) as Sprite, 90, 70, 50, 0);
+            orgs[3].leader = new Char("gangster", "Westboro", "Suits", "Howard Phillips Jr.", Resources.Load("Sprites/Howard Phillips Jr.", typeof(Sprite)) as Sprite, 80, 100, 60, 0);
+
+            districts.Add(new("Northslum", new List<int>() { 15, 40, 5, 30, 5, 5 }, 5, 20, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0), new OrgValuePair(orgs[3], 0) }));
+            districts.Add(new("Eastmouth", new List<int>() { 20, 20, 30, 20, 5, 5 }, 10, 40, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0), new OrgValuePair(orgs[3], 0) }));
+            districts.Add(new("Westboro", new List<int>() { 60, 5, 10, 5, 10, 10 }, 20, 80, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0), new OrgValuePair(orgs[3], 0) }));
         }
     }
     public Org GetOrg(string name)
     {
         return orgs.Find(i => i.name == name);
+    }
+    public District GetDistrict(string name)
+    {
+        return districts.Find(i => i.name == name);
     }
     public void Save()
     {

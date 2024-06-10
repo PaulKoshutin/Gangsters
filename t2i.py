@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
         payload = {
             "prompt": "gang emblem of "+sys.argv[2]+", ((black background)), " + descr,
-            "negative_prompt": "1girl, 1boy, man, woman, person, gray background",
+            "negative_prompt": "1girl, 1boy, man, woman, person, gray background, watermark",
             "seed": -1,
             "steps": 20,
             "width": 512,
@@ -66,7 +66,7 @@ if __name__ == '__main__':
         }
         call_txt2img_api(payload, sys.argv[2])
     else:
-        if sys.argv[6] == "":
+        if len(sys.argv) < 7:
             user_message = "Provide a name and surname for a modern day " + sys.argv[1] + " " + sys.argv[2] + " " + sys.argv[3] + " " + sys.argv[4] + ". Adding a nickname or a middle name is optional, but only rarely. Make the name interesting. Say nothing before or after the name and surname."
             data = {"mode": "instruct", "character": "Assistant", "messages": [{"role": "user", "content": user_message}]}
             response = requests.post(text_url, headers=headers, json=data, verify=False)
@@ -80,10 +80,10 @@ if __name__ == '__main__':
         user_message_universal = " Mention age, race, hair color, haircut, emotion, background scenery, fatness, clothes, facial hair if any. Type of clothes depends on being poor or rich. Don't mention boots, pants or trousers, focus on the upper body and face. Say nothing before or after the description."
 
         if sys.argv[4] == "gangster":
-            direct_prompt = " wearing " + sys.argv[5] + " clothes , "
+            direct_prompt = " wearing (" + sys.argv[5] + ") clothes , "
             user_message = "Provide a short description of a modern day " + sys.argv[1] + " " + sys.argv[2] + " " + sys.argv[3] + " " + sys.argv[4] + " wearing " + sys.argv[5] + " - the gang color - for image generating ai." + user_message_universal
         elif sys.argv[4] == "policeman":
-            direct_prompt = " wearing " + sys.argv[5] + " police uniform , "
+            direct_prompt = " wearing (" + sys.argv[5] + ") police uniform , "
             user_message = "Provide a short description of a modern day " + sys.argv[1] + " " + sys.argv[2] + " " + sys.argv[3] + " " + sys.argv[4] + " wearing a " + sys.argv[5] + " police uniform for image generating ai." + user_message_universal
         else:
             direct_prompt = ""
@@ -95,8 +95,8 @@ if __name__ == '__main__':
 
 
         payload = {
-            "prompt": "face close-up, SFW, " + sys.argv[1] + ", " + sys.argv[2] + ", " + sys.argv[3] + ", " + sys.argv[4] + direct_prompt + assistant_message,
-            "negative_prompt": "",
+            "prompt": "(face close-up), SFW, " + sys.argv[1] + ", " + sys.argv[2] + ", " + sys.argv[3] + ", " + sys.argv[4] + direct_prompt + assistant_message,
+            "negative_prompt": "watermark, cleavage, breasts, NSFW",
             "seed": -1,
             "steps": 20,
             "width": 512,

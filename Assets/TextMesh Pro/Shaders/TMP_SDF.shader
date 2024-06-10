@@ -4,10 +4,10 @@ Properties {
 	_FaceTex			("Face Texture", 2D) = "white" {}
 	_FaceUVSpeedX		("Face UV Speed X", Range(-5, 5)) = 0.0
 	_FaceUVSpeedY		("Face UV Speed Y", Range(-5, 5)) = 0.0
-	[HDR]_FaceColor		("Face Color", Color) = (1,1,1,1)
+	[HDR]_Facecolor		("Face color", color) = (1,1,1,1)
 	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
-	[HDR]_OutlineColor	("Outline Color", Color) = (0,0,0,1)
+	[HDR]_Outlinecolor	("Outline color", color) = (0,0,0,1)
 	_OutlineTex			("Outline Texture", 2D) = "white" {}
 	_OutlineUVSpeedX	("Outline UV Speed X", Range(-5, 5)) = 0.0
 	_OutlineUVSpeedY	("Outline UV Speed Y", Range(-5, 5)) = 0.0
@@ -21,7 +21,7 @@ Properties {
 	_BevelRoundness		("Bevel Roundness", Range(0,1)) = 0
 
 	_LightAngle			("Light Angle", Range(0.0, 6.2831853)) = 3.1416
-	[HDR]_SpecularColor	("Specular", Color) = (1,1,1,1)
+	[HDR]_Specularcolor	("Specular", color) = (1,1,1,1)
 	_SpecularPower		("Specular", Range(0,4)) = 2.0
 	_Reflectivity		("Reflectivity", Range(5.0,15.0)) = 10
 	_Diffuse			("Diffuse", Range(0,1)) = 0.5
@@ -31,19 +31,19 @@ Properties {
 	_BumpOutline		("Bump Outline", Range(0,1)) = 0
 	_BumpFace			("Bump Face", Range(0,1)) = 0
 
-	_ReflectFaceColor	("Reflection Color", Color) = (0,0,0,1)
-	_ReflectOutlineColor("Reflection Color", Color) = (0,0,0,1)
+	_ReflectFacecolor	("Reflection color", color) = (0,0,0,1)
+	_ReflectOutlinecolor("Reflection color", color) = (0,0,0,1)
 	_Cube 				("Reflection Cubemap", Cube) = "black" { /* TexGen CubeReflect */ }
 	_EnvMatrixRotation	("Texture Rotation", vector) = (0, 0, 0, 0)
 
 
-	[HDR]_UnderlayColor	("Border Color", Color) = (0,0,0, 0.5)
+	[HDR]_Underlaycolor	("Border color", color) = (0,0,0, 0.5)
 	_UnderlayOffsetX	("Border OffsetX", Range(-1,1)) = 0
 	_UnderlayOffsetY	("Border OffsetY", Range(-1,1)) = 0
 	_UnderlayDilate		("Border Dilate", Range(-1,1)) = 0
 	_UnderlaySoftness	("Border Softness", Range(0,1)) = 0
 
-	[HDR]_GlowColor			("Color", Color) = (0, 1, 0, 0.5)
+	[HDR]_Glowcolor			("color", color) = (0, 1, 0, 0.5)
 	_GlowOffset			("Offset", Range(-1,1)) = 0
 	_GlowInner			("Inner", Range(0,1)) = 0.05
 	_GlowOuter			("Outer", Range(0,1)) = 0.05
@@ -81,7 +81,7 @@ Properties {
 	_StencilReadMask	("Stencil Read Mask", Float) = 255
 
 	_CullMode			("Cull Mode", Float) = 0
-	_ColorMask			("Color Mask", Float) = 15
+	_colorMask			("color Mask", Float) = 15
 }
 
 SubShader {
@@ -108,7 +108,7 @@ SubShader {
 	Fog { Mode Off }
 	ZTest [unity_GUIZTestMode]
 	Blend One OneMinusSrcAlpha
-	ColorMask [_ColorMask]
+	colorMask [_colorMask]
 
 	Pass {
 		CGPROGRAM
@@ -131,7 +131,7 @@ SubShader {
 			UNITY_VERTEX_INPUT_INSTANCE_ID
 			float4	position		: POSITION;
 			float3	normal			: NORMAL;
-			fixed4	color			: COLOR;
+			fixed4	color			: color;
 			float2	texcoord0		: TEXCOORD0;
 			float2	texcoord1		: TEXCOORD1;
 		};
@@ -141,7 +141,7 @@ SubShader {
 			UNITY_VERTEX_INPUT_INSTANCE_ID
 			UNITY_VERTEX_OUTPUT_STEREO
 			float4	position		: SV_POSITION;
-			fixed4	color			: COLOR;
+			fixed4	color			: color;
 			float2	atlas			: TEXCOORD0;		// Atlas
 			float4	param			: TEXCOORD1;		// alphaClip, scale, bias, weight
 			float4	mask			: TEXCOORD2;		// Position in object space(xy), pixel Size(zw)
@@ -149,7 +149,7 @@ SubShader {
 
 		#if (UNDERLAY_ON || UNDERLAY_INNER)
 			float4	texcoord2		: TEXCOORD4;		// u,v, scale, bias
-			fixed4	underlayColor	: COLOR1;
+			fixed4	underlaycolor	: color1;
 		#endif
 			float4 textures			: TEXCOORD5;
 		};
@@ -195,8 +195,8 @@ SubShader {
 			alphaClip = alphaClip / 2.0 - ( .5 / scale) - weight;
 
 		#if (UNDERLAY_ON || UNDERLAY_INNER)
-			float4 underlayColor = _UnderlayColor;
-			underlayColor.rgb *= underlayColor.a;
+			float4 underlaycolor = _Underlaycolor;
+			underlaycolor.rgb *= underlaycolor.a;
 
 			float bScale = scale;
 			bScale /= 1 + ((_UnderlaySoftness*_ScaleRatioC) * bScale);
@@ -225,7 +225,7 @@ SubShader {
 			output.viewDir =	mul((float3x3)_EnvMatrix, _WorldSpaceCameraPos.xyz - mul(unity_ObjectToWorld, vert).xyz);
 			#if (UNDERLAY_ON || UNDERLAY_INNER)
 			output.texcoord2 = float4(input.texcoord0 + bOffset, bScale, bBias);
-			output.underlayColor =	underlayColor;
+			output.underlaycolor =	underlaycolor;
 			#endif
 			output.textures = float4(faceUV, outlineUV);
 
@@ -251,15 +251,15 @@ SubShader {
 			float outline = (_OutlineWidth * _ScaleRatioA) * scale;
 			float softness = (_OutlineSoftness * _ScaleRatioA) * scale;
 
-			half4 faceColor = _FaceColor;
-			half4 outlineColor = _OutlineColor;
+			half4 facecolor = _Facecolor;
+			half4 outlinecolor = _Outlinecolor;
 
-			faceColor.rgb *= input.color.rgb;
+			facecolor.rgb *= input.color.rgb;
 
-			faceColor *= tex2D(_FaceTex, input.textures.xy + float2(_FaceUVSpeedX, _FaceUVSpeedY) * _Time.y);
-			outlineColor *= tex2D(_OutlineTex, input.textures.zw + float2(_OutlineUVSpeedX, _OutlineUVSpeedY) * _Time.y);
+			facecolor *= tex2D(_FaceTex, input.textures.xy + float2(_FaceUVSpeedX, _FaceUVSpeedY) * _Time.y);
+			outlinecolor *= tex2D(_OutlineTex, input.textures.zw + float2(_OutlineUVSpeedX, _OutlineUVSpeedY) * _Time.y);
 
-			faceColor = GetColor(sd, faceColor, outlineColor, outline, softness);
+			facecolor = Getcolor(sd, facecolor, outlinecolor, outline, softness);
 
 		#if BEVEL_ON
 			float3 dxy = float3(0.5 / _TextureWidth, 0.5 / _TextureHeight, 0);
@@ -272,40 +272,40 @@ SubShader {
 			float3 light = normalize(float3(sin(_LightAngle), cos(_LightAngle), -1.0));
 
 			float3 col = GetSpecular(n, light);
-			faceColor.rgb += col*faceColor.a;
-			faceColor.rgb *= 1-(dot(n, light)*_Diffuse);
-			faceColor.rgb *= lerp(_Ambient, 1, n.z*n.z);
+			facecolor.rgb += col*facecolor.a;
+			facecolor.rgb *= 1-(dot(n, light)*_Diffuse);
+			facecolor.rgb *= lerp(_Ambient, 1, n.z*n.z);
 
 			fixed4 reflcol = texCUBE(_Cube, reflect(input.viewDir, -n));
-			faceColor.rgb += reflcol.rgb * lerp(_ReflectFaceColor.rgb, _ReflectOutlineColor.rgb, saturate(sd + outline * 0.5)) * faceColor.a;
+			facecolor.rgb += reflcol.rgb * lerp(_ReflectFacecolor.rgb, _ReflectOutlinecolor.rgb, saturate(sd + outline * 0.5)) * facecolor.a;
 		#endif
 
 		#if UNDERLAY_ON
 			float d = tex2D(_MainTex, input.texcoord2.xy).a * input.texcoord2.z;
-			faceColor += input.underlayColor * saturate(d - input.texcoord2.w) * (1 - faceColor.a);
+			facecolor += input.underlaycolor * saturate(d - input.texcoord2.w) * (1 - facecolor.a);
 		#endif
 
 		#if UNDERLAY_INNER
 			float d = tex2D(_MainTex, input.texcoord2.xy).a * input.texcoord2.z;
-			faceColor += input.underlayColor * (1 - saturate(d - input.texcoord2.w)) * saturate(1 - sd) * (1 - faceColor.a);
+			facecolor += input.underlaycolor * (1 - saturate(d - input.texcoord2.w)) * saturate(1 - sd) * (1 - facecolor.a);
 		#endif
 
 		#if GLOW_ON
-			float4 glowColor = GetGlowColor(sd, scale);
-			faceColor.rgb += glowColor.rgb * glowColor.a;
+			float4 glowcolor = GetGlowcolor(sd, scale);
+			facecolor.rgb += glowcolor.rgb * glowcolor.a;
 		#endif
 
 		// Alternative implementation to UnityGet2DClipping with support for softness.
 		#if UNITY_UI_CLIP_RECT
 			half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(input.mask.xy)) * input.mask.zw);
-			faceColor *= m.x * m.y;
+			facecolor *= m.x * m.y;
 		#endif
 
 		#if UNITY_UI_ALPHACLIP
-			clip(faceColor.a - 0.001);
+			clip(facecolor.a - 0.001);
 		#endif
 
-  		return faceColor * input.color.a;
+  		return facecolor * input.color.a;
 		}
 
 		ENDCG

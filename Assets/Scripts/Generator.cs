@@ -36,6 +36,7 @@ public class Generator : MonoBehaviour
         manual = false;
         generationOfOrgIsDone = false;
         generationOfCharIsDone = false;
+        charName = "";
     }
     public async void GenerateOrg(string orgName, string color)
     {
@@ -70,24 +71,23 @@ public class Generator : MonoBehaviour
         else
             generationOfOrgIsDone = true;
     }
-    public void GenerateCharManually(string background, string race, string gender, string color, string charName, string orgName)
-    {
-        this.background = background;
-        this.race = race;   
-        this.gender = gender;
-        this.color = color;
-        this.charName = charName;
-        this.orgName = orgName;
-        this.type = "gangster";
-        this.districtName = "Northslum";
-        manual = true;
-
-        GenerateChar(type, districtName, orgName);     
-    }
-    public async void GenerateChar(string type, string district, string orgName)
+    
+    public async void GenerateChar(string type, string district, string orgName, bool manual = false, string background="", string race = "", string gender = "", string color = "", string charName = "")
     {
         if (!manual)
             GetCharData(type, district, orgName);
+        else
+        {
+            this.background = background;
+            this.race = race;
+            this.gender = gender;
+            this.color = color;
+            this.charName = charName;
+            this.orgName = orgName;
+            this.type = type;
+            this.districtName = district;
+            this.manual = true;
+        }
         Task task = new Task(StartWorkingOnChar);
         task.Start();
         Debug.Log("Working on char. type:" + type + ", district:" + district + ", org:" + orgName);
@@ -143,13 +143,15 @@ public class Generator : MonoBehaviour
             color = "";
         else { color = ActiveEntities.Instance.GetOrg(orgName).color; }
         int wealthRoll = Random.Range(0, 100);
-        if (wealthRoll <=  district.overall_wealth)
+        if (wealthRoll <=  district.wealth)
             background = "rich";
-        else if (wealthRoll <= district.overall_wealth + 30)
+        else if (wealthRoll <= district.wealth * 3)
             background = "middle-class";
         else background = "poor";
         if (Random.Range(0, 100) <= 80)
             gender = "male";
+        else
+            gender = "female";
         int raceRoll = Random.Range(0, 100);
         int raceSum = 0;
         for (int i = 0; i < district.racial_distribution.Count; i++)
@@ -193,19 +195,14 @@ public class Generator : MonoBehaviour
             physical = 100;
         else if (physical < 10) {  physical = 10; }
 
-        int upkeep = 0;
-        if (type == "gangster")
-            upkeep = mental + social + physical;
+        int pay = Random.Range((mental + social + physical)/2, (mental + social + physical)*2);
 
-        int wealth = 0;
-        if (type == "businessman")
-            wealth = Random.Range(50, 200);
         if (background == "middle-class")
-            wealth += Random.Range(50, 200);
+            pay += Random.Range(50, 200);
         if (background == "rich")
-            wealth += Random.Range(100, 400);
+            pay += Random.Range(100, 400);
 
-        c = new (type, districtName, orgName, charName, Utils.Instance.LoadNewSprite("Images/" + charName + ".png"), mental, social, physical, upkeep, wealth);
+        c = new (type, districtName, orgName, charName, Utils.Instance.LoadNewSprite("Images/" + charName + ".png"), mental, social, physical, pay);
 
         if (!manual)
             CharPool.Instance.AddCharToPool(c);
@@ -214,13 +211,15 @@ public class Generator : MonoBehaviour
             o.leader = c;
             GameObject.FindGameObjectWithTag("New Char Image").GetComponent<Image>().sprite = Utils.Instance.LoadNewSprite("Images/" + charName + ".png");
         }
+        charName = "";
         generationOfCharIsDone = false;
         manual = false;
     }
     private void FinishOrg()
     {
-        GameObject.FindGameObjectWithTag("New Org Image").GetComponent<Image>().sprite = Utils.Instance.LoadNewSprite("Images/" + orgName + ".png");
-        o = new Org(orgName, color, 500, true);
+        Sprite emblem = Utils.Instance.LoadNewSprite("Images/" + orgName + ".png");
+        GameObject.FindGameObjectWithTag("New Org Image").GetComponent<Image>().sprite = emblem;
+        o = new Org(orgName, color, 500, true, emblem);
         generationOfOrgIsDone = false;
     }
     private void Update()

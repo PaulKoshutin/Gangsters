@@ -7,15 +7,15 @@ Shader "TextMeshPro/Mobile/Distance Field (Surface)" {
 
 Properties {
 	_FaceTex			("Fill Texture", 2D) = "white" {}
-	[HDR]_FaceColor		("Fill Color", Color) = (1,1,1,1)
+	[HDR]_Facecolor		("Fill color", color) = (1,1,1,1)
 	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
-	[HDR]_OutlineColor	("Outline Color", Color) = (0,0,0,1)
+	[HDR]_Outlinecolor	("Outline color", color) = (0,0,0,1)
 	_OutlineTex			("Outline Texture", 2D) = "white" {}
 	_OutlineWidth		("Outline Thickness", Range(0, 1)) = 0
 	_OutlineSoftness	("Outline Softness", Range(0,1)) = 0
 
-	[HDR]_GlowColor		("Color", Color) = (0, 1, 0, 0.5)
+	[HDR]_Glowcolor		("color", color) = (0, 1, 0, 0.5)
 	_GlowOffset			("Offset", Range(-1,1)) = 0
 	_GlowInner			("Inner", Range(0,1)) = 0.05
 	_GlowOuter			("Outer", Range(0,1)) = 0.05
@@ -71,7 +71,7 @@ SubShader {
 
 	struct Input
 	{
-		fixed4	color		: COLOR;
+		fixed4	color		: color;
 		float2	uv_MainTex;
 		float2	uv2_FaceTex;
 		float2  uv2_OutlineTex;
@@ -124,7 +124,7 @@ SubShader {
 
 		uniform sampler2D _MainTex;
 
-		float4 frag(v2f i) : COLOR
+		float4 frag(v2f i) : color
 		{
 			fixed4 texcol = tex2D(_MainTex, i.uv).a;
 			clip(texcol.a - i.alphaClip);

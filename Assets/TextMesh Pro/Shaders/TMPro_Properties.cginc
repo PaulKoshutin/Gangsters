@@ -2,14 +2,14 @@
 uniform sampler2D	_FaceTex;					// Alpha : Signed Distance
 uniform float		_FaceUVSpeedX;
 uniform float		_FaceUVSpeedY;
-uniform fixed4		_FaceColor;					// RGBA : Color + Opacity
+uniform fixed4		_Facecolor;					// RGBA : color + Opacity
 uniform float		_FaceDilate;				// v[ 0, 1]
 uniform float		_OutlineSoftness;			// v[ 0, 1]
 
-uniform sampler2D	_OutlineTex;				// RGBA : Color + Opacity
+uniform sampler2D	_OutlineTex;				// RGBA : color + Opacity
 uniform float		_OutlineUVSpeedX;
 uniform float		_OutlineUVSpeedY;
-uniform fixed4		_OutlineColor;				// RGBA : Color + Opacity
+uniform fixed4		_Outlinecolor;				// RGBA : color + Opacity
 uniform float		_OutlineWidth;				// v[ 0, 1]
 
 uniform float		_Bevel;						// v[ 0, 1]
@@ -23,27 +23,27 @@ uniform float		_BumpOutline;				// v[ 0, 1]
 uniform float		_BumpFace;					// v[ 0, 1]
 
 uniform samplerCUBE	_Cube;						// Cube / sphere map
-uniform fixed4 		_ReflectFaceColor;			// RGB intensity
-uniform fixed4		_ReflectOutlineColor;
+uniform fixed4 		_ReflectFacecolor;			// RGB intensity
+uniform fixed4		_ReflectOutlinecolor;
 //uniform float		_EnvTiltX;					// v[-1, 1]
 //uniform float		_EnvTiltY;					// v[-1, 1]
 uniform float3      _EnvMatrixRotation;
 uniform float4x4	_EnvMatrix;
 
-uniform fixed4		_SpecularColor;				// RGB intensity
+uniform fixed4		_Specularcolor;				// RGB intensity
 uniform float		_LightAngle;				// v[ 0,Tau]
 uniform float		_SpecularPower;				// v[ 0, 1]
 uniform float		_Reflectivity;				// v[ 5, 15]
 uniform float		_Diffuse;					// v[ 0, 1]
 uniform float		_Ambient;					// v[ 0, 1]
 
-uniform fixed4		_UnderlayColor;				// RGBA : Color + Opacity
+uniform fixed4		_Underlaycolor;				// RGBA : color + Opacity
 uniform float		_UnderlayOffsetX;			// v[-1, 1]
 uniform float		_UnderlayOffsetY;			// v[-1, 1]
 uniform float		_UnderlayDilate;			// v[-1, 1]
 uniform float		_UnderlaySoftness;			// v[ 0, 1]
 
-uniform fixed4 		_GlowColor;					// RGBA : Color + Intesity
+uniform fixed4 		_Glowcolor;					// RGBA : color + Intesity
 uniform float 		_GlowOffset;				// v[-1, 1]
 uniform float 		_GlowOuter;					// v[ 0, 1]
 uniform float 		_GlowInner;					// v[ 0, 1]
@@ -68,7 +68,7 @@ uniform float4		_MaskCoord;
 uniform float4		_ClipRect;	// bottom left(x,y) : top right(z,w)
 //uniform float		_MaskWipeControl;
 //uniform float		_MaskEdgeSoftness;
-//uniform fixed4		_MaskEdgeColor;
+//uniform fixed4		_MaskEdgecolor;
 //uniform bool		_MaskInverse;
 
 uniform float		_MaskSoftnessX;

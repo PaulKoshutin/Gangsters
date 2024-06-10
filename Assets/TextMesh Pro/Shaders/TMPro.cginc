@@ -7,19 +7,19 @@ float2 UnpackUV(float uv)
 	return output * 0.001953125;
 }
 
-fixed4 GetColor(half d, fixed4 faceColor, fixed4 outlineColor, half outline, half softness)
+fixed4 Getcolor(half d, fixed4 facecolor, fixed4 outlinecolor, half outline, half softness)
 {
 	half faceAlpha = 1-saturate((d - outline * 0.5 + softness * 0.5) / (1.0 + softness));
 	half outlineAlpha = saturate((d + outline * 0.5)) * sqrt(min(1.0, outline));
 
-	faceColor.rgb *= faceColor.a;
-	outlineColor.rgb *= outlineColor.a;
+	facecolor.rgb *= facecolor.a;
+	outlinecolor.rgb *= outlinecolor.a;
 
-	faceColor = lerp(faceColor, outlineColor, outlineAlpha);
+	facecolor = lerp(facecolor, outlinecolor, outlineAlpha);
 
-	faceColor *= faceAlpha;
+	facecolor *= faceAlpha;
 
-	return faceColor;
+	return facecolor;
 }
 
 float3 GetSurfaceNormal(float4 h, float bias)
@@ -60,17 +60,17 @@ float3 GetSurfaceNormal(float2 uv, float bias, float3 delta)
 float3 GetSpecular(float3 n, float3 l)
 {
 	float spec = pow(max(0.0, dot(n, l)), _Reflectivity);
-	return _SpecularColor.rgb * spec * _SpecularPower;
+	return _Specularcolor.rgb * spec * _SpecularPower;
 }
 
-float4 GetGlowColor(float d, float scale)
+float4 GetGlowcolor(float d, float scale)
 {
 	float glow = d - (_GlowOffset*_ScaleRatioB) * 0.5 * scale;
 	float t = lerp(_GlowInner, (_GlowOuter * _ScaleRatioB), step(0.0, glow)) * 0.5 * scale;
 	glow = saturate(abs(glow/(1.0 + t)));
 	glow = 1.0-pow(glow, _GlowPower);
 	glow *= sqrt(min(1.0, t)); // Fade off glow thinner than 1 screen pixel
-	return float4(_GlowColor.rgb, saturate(_GlowColor.a * glow * 2));
+	return float4(_Glowcolor.rgb, saturate(_Glowcolor.a * glow * 2));
 }
 
 float4 BlendARGB(float4 overlying, float4 underlying)

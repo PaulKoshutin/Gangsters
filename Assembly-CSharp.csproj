@@ -60,7 +60,7 @@
     <Analyzer Include="F:\Unity\Editor\2022.3.27f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\UI\OrgSlot.cs" />
+    <Compile Include="Assets\Scripts\Chars\HierarchyManager.cs" />
     <Compile Include="Assets\Scripts\UI\TopButtons.cs" />
     <Compile Include="Assets\Scripts\ActiveEntities.cs" />
     <Compile Include="Assets\Scripts\Activity.cs" />
@@ -68,17 +68,19 @@
     <Compile Include="Assets\Scripts\Chars\Char.cs" />
     <Compile Include="Assets\Scripts\Chars\OrgComposite.cs" />
     <Compile Include="Assets\Scripts\Chars\CharPool.cs" />
-    <Compile Include="Assets\Scripts\UI\DraggableItem.cs" />
+    <Compile Include="Assets\Scripts\UI\DraggableChar.cs" />
     <Compile Include="Assets\Scripts\Strategy.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\UI\IntroButtons.cs" />
     <Compile Include="Assets\Scripts\SaveLoader.cs" />
+    <Compile Include="Assets\Scripts\Chars\OrgLeaf.cs" />
     <Compile Include="Assets\Scripts\UI\NewGameUI.cs" />
     <Compile Include="Assets\Scripts\Generator.cs" />
     <Compile Include="Assets\Scripts\Facade.cs" />
     <Compile Include="Assets\Scripts\Chars\OrgComponent.cs" />
     <Compile Include="Assets\Scripts\Utils.cs" />
     <Compile Include="Assets\Scripts\District.cs" />
+    <Compile Include="Assets\Scripts\UI\LeftPanel.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

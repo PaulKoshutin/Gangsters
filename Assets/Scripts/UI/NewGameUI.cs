@@ -7,6 +7,7 @@ public class NewGameUI : MonoBehaviour
 {
     public string orgName;
     public string color;
+    public string feature;
 
     public string charName;
     public string background;
@@ -15,13 +16,14 @@ public class NewGameUI : MonoBehaviour
 
     private void Awake()
     {
-    orgName = "Lords";
-    color = "purple";
+        orgName = "Lords";
+        color = "purple";
+        feature = "";
 
-    charName = "Joe Masters";
-    background = "poor";
-    race = "white-american";
-    gender = "male";
+        charName = "Joe Masters";
+        background = "poor";
+        race = "white-american";
+        gender = "male";
     }
     public void getOrgName(string name)
     {
@@ -36,6 +38,19 @@ public class NewGameUI : MonoBehaviour
         else if (val == 2)
             this.color = "orange";
     }
+    public void getFeature(int val)
+    {
+        if (val == 0)
+            this.feature = "";
+        else if (val == 1)
+            this.feature = "_top_hat";
+        else if (val == 2)
+            this.feature = "_beanie";
+        else if (val == 3)
+            this.feature = "_sunglasses";
+        else if (val == 4)
+            this.feature = "_hair";
+    }
     public void getCharName(string name)
     {
         this.charName = name;
@@ -43,41 +58,41 @@ public class NewGameUI : MonoBehaviour
     public void getBackground(int val)
     {
         if (val == 0)
-            this.color = "poor";
+            this.background = "poor";
         else if (val == 1)
-            this.color = "middle-class";
+            this.background = "middle-class";
         else if (val == 2)
-            this.color = "rich";
+            this.background = "rich";
     }
     public void getRace(int val)
     {
         if (val == 0)
-            this.color = "white-american";
+            this.race = "white-american";
         else if (val == 1)
-            this.color = "african-american";
+            this.race = "african-american";
         else if (val == 2)
-            this.color = "asian-american";
+            this.race = "asian-american";
         else if (val == 3)
-            this.color = "latino-american";
+            this.race = "latino-american";
         else if (val == 4)
-            this.color = "arab-american";
+            this.race = "arab-american";
         else if (val == 5)
-            this.color = "indian-american";
+            this.race = "indian-american";
     }
     public void getGender(int val)
     {
         if (val == 0)
-            this.color = "male";
+            this.gender = "male";
         else if (val == 1)
-            this.color = "female";
+            this.gender = "female";
     }
     public void generateOrg()
     {
-        Facade.Instance.GenerateOrg(orgName, color);
+        Facade.Instance.GenerateOrg(orgName, color + feature);
     }
     public void generateChar()
     {
-        Facade.Instance.GenerateCharManually(background,race,gender,color, charName, orgName);
+        Facade.Instance.GenerateCharManually(background,race,gender,color + feature, charName, orgName);
     }
     public void StartGame()
     {

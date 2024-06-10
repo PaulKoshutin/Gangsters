@@ -6,14 +6,14 @@
 Shader "TextMeshPro/Mobile/Distance Field SSD" {
 
 Properties {
-	[HDR]_FaceColor		("Face Color", Color) = (1,1,1,1)
+	[HDR]_Facecolor		("Face color", color) = (1,1,1,1)
 	_FaceDilate			("Face Dilate", Range(-1,1)) = 0
 
-	[HDR]_OutlineColor	("Outline Color", Color) = (0,0,0,1)
+	[HDR]_Outlinecolor	("Outline color", color) = (0,0,0,1)
 	_OutlineWidth		("Outline Thickness", Range(0,1)) = 0
 	_OutlineSoftness	("Outline Softness", Range(0,1)) = 0
 
-	[HDR]_UnderlayColor		("Border Color", Color) = (0,0,0,.5)
+	[HDR]_Underlaycolor		("Border color", color) = (0,0,0,.5)
 	_UnderlayOffsetX 	("Border OffsetX", Range(-1,1)) = 0
 	_UnderlayOffsetY 	("Border OffsetY", Range(-1,1)) = 0
 	_UnderlayDilate		("Border Dilate", Range(-1,1)) = 0
@@ -44,7 +44,7 @@ Properties {
 	_MaskSoftnessY		("Mask SoftnessY", float) = 0
 	_MaskTex			("Mask Texture", 2D) = "white" {}
 	_MaskInverse		("Inverse", float) = 0
-	_MaskEdgeColor		("Edge Color", Color) = (1,1,1,1)
+	_MaskEdgecolor		("Edge color", color) = (1,1,1,1)
 	_MaskEdgeSoftness	("Edge Softness", Range(0, 1)) = 0.01
 	_MaskWipeControl	("Wipe Position", Range(0, 1)) = 0.5
 
@@ -55,7 +55,7 @@ Properties {
 	_StencilReadMask	("Stencil Read Mask", Float) = 255
 
     _CullMode           ("Cull Mode", Float) = 0
-	_ColorMask			("Color Mask", Float) = 15
+	_colorMask			("color Mask", Float) = 15
 }
 
 SubShader {
@@ -80,7 +80,7 @@ SubShader {
 	Fog { Mode Off }
 	ZTest [unity_GUIZTestMode]
 	Blend One OneMinusSrcAlpha
-	ColorMask [_ColorMask]
+	colorMask [_colorMask]
 
 	Pass {
 		CGPROGRAM
