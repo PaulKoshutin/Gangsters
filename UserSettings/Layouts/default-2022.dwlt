@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Game
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 16
+  controlID: 48
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 465
     height: 947
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 13}
   m_Panes:
   - {fileID: 13}
@@ -120,8 +120,8 @@ MonoBehaviour:
     y: 544
     width: 1455
     height: 403
-  m_MinSize: {x: 100, y: 100}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 101, y: 121}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 12}
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 17
+  controlID: 49
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 18
+  controlID: 39
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -268,8 +268,8 @@ MonoBehaviour:
     y: 0
     width: 1093
     height: 544
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -321,7 +321,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts/UI
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -329,16 +329,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts/UI
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
   m_LastProjectPath: F:\Unity\Projects\Gangsters\Gangsters
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 70.980705}
-    m_SelectedIDs: 94080000
-    m_LastClickedID: 2196
-    m_ExpandedIDs: 00000000e80600000808000010080000180800008408000000090000a00a000000ca9a3bffffff7f
+    m_SelectedIDs: e2750000
+    m_LastClickedID: 30178
+    m_ExpandedIDs: 00000000e0750000e2750000e4750000e6750000e8750000ea750000ec75000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -366,7 +366,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000e80600000808000010080000180800008408000000090000a00a0000
+    m_ExpandedIDs: 00000000e0750000e2750000e4750000e6750000e8750000ea750000ec750000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -391,9 +391,9 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 1c36feff
-    m_LastClickedInstanceID: -117220
-    m_HadKeyboardFocusLastEvent: 0
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c623000000000000646e0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -506,9 +506,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 945b0100
-      m_LastClickedID: 88980
-      m_ExpandedIDs: 3e0cfeff3413feff5e1afeffb020feff8a22feffc829feff1e36feff083afeff3e45feff3a49feff484bfeffbcf90000f4f90000f6fb0000aefd0000c60a0100fe0a01002a0b0100960b0100b00b01000a0c0100000d01002c0d0100660d0100c40d0100b80e0100502c0100522e01000a3001009c4201009e440100564601002c5901002e5b0100945b0100a65c0100e65c0100
+      m_SelectedIDs: c2250300
+      m_LastClickedID: 0
+      m_ExpandedIDs: ee78fdff1e93fdff3693fdff3e93fdff4693fdff3496fdffecb4fdff9cbdfdffd0cffdffb6d7fdff80ebfdff4ef5fdffc6fbfdff5c01feff2007feff080bfeff1243feff564bfeffa253feff4654feffe456feff1c57feff486afeff1c71feff8676feff8278feff6084feff688dfeff9893feff269dfeff8ea7feff9ab0feffecb6feff2ccbfeff08d7feffa2e0feffcefbfeff2859ffff5262ffffe06affffec6affff2a6fffff4e72ffff6472ffffe874ffffe876ffffd27cffffba7effff1c82ffffda82ffff7289ffff268bffff9290ffff209dffffdea3ffffb4a4ffffaca6ffff98a8ffff88abffffaeadffff16dbffff34dbffff44dbffff52dbffff54dbffff08fbfffff4ffffff18700000307000000e7200001a7200008072000092730000d2730000ec8800005c8900009c8a0000c08e0000308f0000829e0000629f00006ea0000092a0000002a1000036a100003ea10000d8a1000042a2000058a3000028a4000050a60000c0a6000000a800004aa800005ebe0000cebe00000ec0000074d6000050d7000074d70000d4d70000f8d7000000d8000082d80000d6d800001edb0000fadb00001edc00007edc0000a2dc0000aadc00002cdd000080dd000088ef000064f0000088f00000ecf0000010f1000018f100009af10000eef1000002040100de04010002050100660501008a050100920501001406010068060100144101002842010088420100ba4201003a5d0100f65e0100565f01008460010048c4010004c6010092c70100b6e1020072e30200d2e3020000e5020080ed02008aed02009ced0200fa1503005e16030070160300b016030092170300c6170300f21703007c180300
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -914,9 +914,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 1066.1948, y: 595.6078, z: -6.153113}
+    m_Target: {x: 1020.6838, y: 549.243, z: -5.51939}
     speed: 2
-    m_Value: {x: 1066.1948, y: 595.6078, z: -6.153113}
+    m_Value: {x: 1020.6838, y: 549.243, z: -5.51939}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -966,9 +966,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 625.3119
+    m_Target: 561.9399
     speed: 2
-    m_Value: 625.3119
+    m_Value: 561.9399
   m_Ortho:
     m_Target: 1
     speed: 2

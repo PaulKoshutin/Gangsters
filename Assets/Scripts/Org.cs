@@ -5,6 +5,9 @@ using System.Data.SqlTypes;
 using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEngine;
+using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
+using UnityEngine.SocialPlatforms;
+using Random = UnityEngine.Random;
 
 [Serializable]
 public class Org:ISerializationCallbackReceiver
@@ -21,6 +24,7 @@ public class Org:ISerializationCallbackReceiver
     public List<OrgPolicyPair> policies = new List<OrgPolicyPair>();
     public int money;
     public int respect;
+    public bool destroyed;
 
     public Org(string name, string color, int money, bool player = false, Sprite emblem=null)
     {
@@ -33,7 +37,8 @@ public class Org:ISerializationCallbackReceiver
         else
             this.emblem = Utils.Instance.LoadNewSprite("Images/" + name + ".png");
         respect = 0;
-    }
+        destroyed = false;
+}
     public void InitiatePolicies()
     {
         foreach (Org o in ActiveEntities.Instance.orgs)
@@ -71,6 +76,7 @@ public class Org:ISerializationCallbackReceiver
             known.Remove(c);
         if (recruitable.Contains(c))
             recruitable.Remove(c);
+        money -= c.pay;
     }
     public Char GetRecruitable()
     {
@@ -81,9 +87,71 @@ public class Org:ISerializationCallbackReceiver
         }
         return null;
     }
+    public Char GetExtortable()
+    {
+        foreach (Char b in known)
+            if (b.type == "businessman" && b.org != name)
+                if (b.org == "" || GetPolicyTowards(b.org) != "Peace")
+                    return b;
+        return null;
+    }
+    public Char GetHuntable()
+    {
+        foreach (Char g in known)
+            if (g.type == "gangster" && g.org != name)
+                if (g.org == "" || GetPolicyTowards(g.org) == "War")
+                    return g;
+        return null;
+    }
+    public Char FindHuntable(Char c)
+    {
+        foreach (OrgPolicyPair pair in policies)
+            if (pair.policy == "War")
+            {
+                Org o = ActiveEntities.Instance.GetOrg(pair.org);
+                Char res = o.active[Random.Range(0, o.active.Count - 1)];
+                if (res != null && !res.dead)
+                    return res;
+            }
+        return null;
+    }
     public Char GetActive(string name)
     {
-        return active.Find(i => i.name == name);
+        Char res = active.Find(i => i.name == name);
+        if (res != null && !res.dead)
+            return res;
+        else return null;
+    }
+    public string GetPolicyTowards(string orgName)
+    {
+        return policies.Find(i => i.org == orgName).policy;
+    }
+    public void SetPolicyTowards(string orgName, string policy)
+    {
+        policies.Find(i => i.org == orgName).policy = policy;
+    }
+    public void RespectChange(int val)
+    {
+        respect += val;
+        if (respect > 100)
+            respect = 100;
+        else if (respect < -100)
+            respect = -100;
+    }
+    public void DestroyOrg()
+    {
+        destroyed = true;
+        name += " (Destroyed)";
+        foreach (Char c in active)
+            c.Fire();
+        foreach (Char c in reserve)
+            c.Fire();
+        foreach (Char c in recruitable)
+            c.Fire();
+        foreach (Char c in controlled)
+            c.Free();
+        money = 0;
+        respect = 0;
     }
     public void OnAfterDeserialize()
     {

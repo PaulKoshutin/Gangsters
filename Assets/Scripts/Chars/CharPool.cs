@@ -31,14 +31,14 @@ public class CharPool : MonoBehaviour
         if (!SaveLoader.Instance.loading)     
         {
             foreach (District d in ActiveEntities.Instance.districts)
-                listToGen.Add(new CharsToGen("gangster", d.name, ActiveEntities.Instance.orgs[0].name, 1));
+                listToGen.Add(new CharsToGen("gangster", d.name, ActiveEntities.Instance.orgs[0].name, 2));
 
             for (int i = 1; i < ActiveEntities.Instance.orgs.Count; i++)
-                listToGen.Add(new CharsToGen("gangster", ActiveEntities.Instance.districts[i-1].name, ActiveEntities.Instance.orgs[i].name, 1));
+                listToGen.Add(new CharsToGen("gangster", ActiveEntities.Instance.districts[i-1].name, ActiveEntities.Instance.orgs[i].name, 2));
 
             foreach (District d in ActiveEntities.Instance.districts)
                 foreach (string t in new List<string>() { "businessman", "policeman" })
-                    listToGen.Add(new CharsToGen(t, d.name, "", 1));
+                    listToGen.Add(new CharsToGen(t, d.name, "", 2));
         }
 
         generationIsDone = true;
@@ -63,6 +63,8 @@ public class CharPool : MonoBehaviour
             {  
                 pool.Remove(c);
                 AddToList(type, district, org);
+                if (type == "businessman" && ActiveEntities.Instance.GetDistrict(c.district).businessmen.Count >= ActiveEntities.Instance.GetDistrict(c.district).number_of_businesses)
+                    return null;
                 return c; 
             }
         }

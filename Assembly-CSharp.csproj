@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\Chars\CharPool.cs" />
     <Compile Include="Assets\Scripts\UI\DraggableChar.cs" />
     <Compile Include="Assets\Scripts\Strategy.cs" />
+    <Compile Include="Assets\Scripts\UI\OrderPanel.cs" />
     <Compile Include="Assets\Scripts\Timer.cs" />
     <Compile Include="Assets\Scripts\UI\IntroButtons.cs" />
     <Compile Include="Assets\Scripts\SaveLoader.cs" />

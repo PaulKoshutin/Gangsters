@@ -23,11 +23,13 @@ public class SaveLoader: MonoBehaviour
     {
         CharPool.Instance.Save();
         ActiveEntities.Instance.Save();
+        Timer.Instance.Save();
     }
     public void Load()
     {
         CharPool.Instance.Load();
         ActiveEntities.Instance.Load();
+        Timer.Instance.Load();
     }
     void OnEnable()
     {

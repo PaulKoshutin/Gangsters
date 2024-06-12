@@ -20,12 +20,15 @@ public class DraggableChar : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        parentAfterDrag = transform.parent;
-        transform.SetParent(transform.root);
-        transform.SetAsLastSibling();
+        if (ActiveEntities.Instance.orgs[0].money > c.pay)
+        {
+            parentAfterDrag = transform.parent;
+            transform.SetParent(transform.root);
+            transform.SetAsLastSibling();
 
-        group.alpha = .5f;
-        image.raycastTarget = false;
+            group.alpha = .5f;
+            image.raycastTarget = false;
+        }
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -44,15 +47,19 @@ public class DraggableChar : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
     {
         this.c = c;
         this.image.sprite = c.image;
+        c.draggableIcon = this;
     }
     public void Fire()
     {
-        c.Fire();
-        transform.parent.GetComponent<OrgComponent>().superior.officeholder.subordinates.Remove(c.name);
-        if (transform.parent.name == "CharSlotMain")
-            foreach (OrgComponent sub in transform.parent.GetComponent<OrgComposite>().subordinates)
-                sub.officeholder.superior = "";
-        transform.parent.GetComponent<OrgComponent>().officeholder = null;
+        if (transform.parent.name != "Content")
+        {
+            transform.parent.GetComponent<OrgComponent>().superior.officeholder.subordinates.Remove(c.name);
+            if (transform.parent.name == "CharSlotMain")
+                foreach (OrgComponent sub in transform.parent.GetComponent<OrgComposite>().subordinates)
+                    if (sub.officeholder != null)
+                        sub.officeholder.superior = "";
+            transform.parent.GetComponent<OrgComponent>().officeholder = null;
+        }
         Destroy(gameObject);
     }
     private void ShowOnLeftPanel(Char c)

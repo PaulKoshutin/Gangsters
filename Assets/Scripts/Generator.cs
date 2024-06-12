@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -97,25 +98,41 @@ public class Generator : MonoBehaviour
     {
         generationOfCharIsDone = false;
 
+        string input = ("t2i.py " + background + " " + race + " " + gender + " " + type + " " + color + " " + charName.Replace(" ", "_")).Trim();
+
+
         Process p = new Process();
-        p.StartInfo = new ProcessStartInfo("python.exe", "t2i.py " + background + " " + race + " " + gender + " " + type + " " + color + " " + charName.Replace(" ", "_"))
+        p.StartInfo = new ProcessStartInfo("python.exe", input)
         {
             RedirectStandardOutput = true,
+            RedirectStandardError = true,
             UseShellExecute = false,
             CreateNoWindow = true
         };
         p.Start();
 
+        var errors = p.StandardError.ReadToEnd();
         string name = p.StandardOutput.ReadLine();
         string output = p.StandardOutput.ReadToEnd();
+
         p.WaitForExit();
 
+        if (errors != "")
+            Debug.Log(errors);
         Debug.Log(name);
         Debug.Log(output);
 
-        if (name == null || output == "")
+        if (name != null)
+            name = name.Trim();
+        if (output != null)
+            output = output.Trim();
+
+        if (name == null || output == null || name == "" || output == "")
         {
-            CharPool.Instance.AddCharToPool();
+            if (!manual)
+                CharPool.Instance.AddCharToPool();
+            else
+                GenerateChar(type,districtName,orgName,true, background, race, gender, color, charName);
         }
         else
         {
@@ -182,6 +199,12 @@ public class Generator : MonoBehaviour
             physical += Random.Range(5, 20);
             mental -= Random.Range(5, 20);
         }
+        if (type == "policeman")
+        {
+            mental += Random.Range(5, 20);
+            social += Random.Range(5, 20);
+            physical += Random.Range(5, 20);
+        }
         if (mental > 100)
             mental = 100;
         else if (mental < 10) { mental = 10; }
@@ -192,12 +215,17 @@ public class Generator : MonoBehaviour
             physical = 100;
         else if (physical < 10) {  physical = 10; }
 
-        int pay = Random.Range((mental + social + physical)/2, (mental + social + physical)*2);
+        int pay = 0;
+        if (!manual)
+            pay = Random.Range((mental + social + physical) / 2, (mental + social + physical) * 2);
+        else
+            pay = 0;
 
-        if (background == "middle-class")
-            pay += Random.Range(50, 200);
-        if (background == "rich")
-            pay += Random.Range(100, 400);
+        if (type == "businessman")
+            if (background == "middle-class")
+                pay += Random.Range(50, 200);
+            else if (background == "rich")
+                pay += Random.Range(100, 400);
 
         c = new (type, districtName, orgName, charName, Utils.Instance.LoadNewSprite("Images/" + charName + ".png"), mental, social, physical, pay, false, manual);
 

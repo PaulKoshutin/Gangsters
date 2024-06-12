@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,11 +10,11 @@ public class Timer : MonoBehaviour
 {
     public static Timer Instance { get; private set; }
 
-    int day;
-    int month;
-    int year;
-    int gameSpeed = 0;
-    int prevGameSpeed = 0;
+    public int day;
+    public int month;
+    public int year;
+    public int gameSpeed = 0;
+    public int prevGameSpeed = 0;
 
     private void Update()
     {
@@ -23,10 +24,15 @@ public class Timer : MonoBehaviour
                 prevGameSpeed = gameSpeed;
                 gameSpeed = 0;
             }
-            else
+            else if (gameSpeed == 0)
             {
                 gameSpeed = prevGameSpeed;
                 prevGameSpeed = 0;
+            }
+            else
+            {
+                prevGameSpeed = gameSpeed;
+                gameSpeed = 0;
             }
         else if (Input.GetKeyDown(KeyCode.Alpha1))
             gameSpeed = 1;
@@ -98,6 +104,20 @@ public class Timer : MonoBehaviour
         {
             month = 1;
             year++;
+        }
+    }
+    public void Save()
+    {
+        string temp = JsonUtility.ToJson(this);
+        Directory.CreateDirectory("Save");
+        File.WriteAllText("Save/Timer.json", temp);
+    }
+    public void Load()
+    {
+        if (Directory.Exists("Save"))
+        {
+            string temp = File.ReadAllText("Save/Timer.json");
+            JsonUtility.FromJsonOverwrite(temp, this);
         }
     }
 }
