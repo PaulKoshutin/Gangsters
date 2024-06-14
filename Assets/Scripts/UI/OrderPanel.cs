@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class OrderPanel : MonoBehaviour
 {
+    private Sprite defaultSprite;
     private Char executor;
     private Image exeImage;
     private Char target;
@@ -14,7 +15,8 @@ public class OrderPanel : MonoBehaviour
     {
         exeImage = transform.Find("Executor Image").GetComponent<Image>();
         tarImage = transform.Find("Target Image").GetComponent<Image>();
-    }
+        defaultSprite = exeImage.sprite;
+}
     public void SetExecutor(Char c)
     {
         executor = c;
@@ -48,8 +50,8 @@ public class OrderPanel : MonoBehaviour
 
             executor = null;
             target = null;
-            exeImage.sprite = null;
-            tarImage.sprite = null;
+            exeImage.sprite = defaultSprite;
+            tarImage.sprite = defaultSprite;
             order = "";
             transform.Find("Order Dropdown").GetComponent<TMP_Dropdown>().value = 0;
         }

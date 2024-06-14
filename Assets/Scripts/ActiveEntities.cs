@@ -20,7 +20,7 @@ public class ActiveEntities : MonoBehaviour
 
         if (!SaveLoader.Instance.loading)
         {
-            /*
+            
             orgs.Add(Generator.Instance.o);
             orgs.Add(new("Slummers", "green_baseball_cap", 3000));
             //orgs.Add(new("Hammers", "red_hair", 4000));
@@ -40,11 +40,11 @@ public class ActiveEntities : MonoBehaviour
             districts.Add(new("Northslum", new List<int>() { 15, 40, 5, 30, 5, 5 }, 60, 5, 20, new List<OrgValuePair>() { new OrgValuePair(orgs[0].name, 0), new OrgValuePair(orgs[1].name, 0)}));
             //districts.Add(new("Eastmouth", new List<int>() { 20, 20, 30, 20, 5, 5 }, 40, 10, 40, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0), new OrgValuePair(orgs[3], 0) }));
             //districts.Add(new("Westboro", new List<int>() { 60, 5, 10, 5, 10, 10 }, 20, 20, 80, new List<OrgValuePair>() { new OrgValuePair(orgs[0], 0), new OrgValuePair(orgs[1], 0), new OrgValuePair(orgs[2], 0), new OrgValuePair(orgs[3], 0) }));
-            */
-
+            
+            /*
             orgs.Add(Generator.Instance.o);
-            orgs.Add(new("Slummers", "green_baseball_cap", 3000));
-            orgs.Add(new("Hammers", "red_hair", 4000));
+            orgs.Add(new("Slummers", "green_baseball_cap", 5000));
+            orgs.Add(new("Hammers", "red_hair", 5000));
             orgs.Add(new("Suits", "black_bowtie", 5000));
 
             orgs[0].AddToActive(orgs[0].active[0]);
@@ -54,14 +54,14 @@ public class ActiveEntities : MonoBehaviour
             orgs[2].AddToActive(orgs[2].active[0]);
             orgs[3].AddToActive(new("gangster", "Westboro", "Suits", "Howard Phillips Jr.", Resources.Load("Sprites/Howard Phillips Jr.", typeof(Sprite)) as Sprite, 80, 100, 60, 0, false, true, "Recruit"));
             orgs[3].AddToActive(orgs[3].active[0]);
-
+            
             foreach (Org o in orgs)
                 o.InitiatePolicies();
 
             districts.Add(new("Northslum", new List<int>() { 15, 40, 5, 30, 5, 5 }, 60, 5, 20, new List<OrgValuePair>() { new OrgValuePair(orgs[0].name, 0), new OrgValuePair(orgs[1].name, 0), new OrgValuePair(orgs[2].name, 0), new OrgValuePair(orgs[3].name, 0) }));
             districts.Add(new("Eastmouth", new List<int>() { 20, 20, 30, 20, 5, 5 }, 40, 10, 40, new List<OrgValuePair>() { new OrgValuePair(orgs[0].name, 0), new OrgValuePair(orgs[1].name, 0), new OrgValuePair(orgs[2].name, 0), new OrgValuePair(orgs[3].name, 0) }));
             districts.Add(new("Westboro", new List<int>() { 60, 5, 10, 5, 10, 10 }, 20, 20, 80, new List<OrgValuePair>() { new OrgValuePair(orgs[0].name, 0), new OrgValuePair(orgs[1].name, 0), new OrgValuePair(orgs[2].name, 0), new OrgValuePair(orgs[3].name, 0) }));
-            
+            */
         }
     }
     private void FixedUpdate()
@@ -99,7 +99,7 @@ public class ActiveEntities : MonoBehaviour
                 if (c.strategy != "" && c.subordinates.Count > 0 && !c.squadLeader)
                     foreach (string sub in c.subordinates)
                         o.GetActive(sub).strategy = c.strategy;
-                else if (c.subordinates.Count == 0 && !c.solo)
+                else if (c.subordinates.Count == 0 && !c.solo && !c.squadLeader)
                     c.strategy = "";
                 if (GetOrg(c.org).player && c.strategy == "Patrol")
                 {

@@ -99,6 +99,8 @@ public class Char : ISerializationCallbackReceiver
                 if (subordinates.Count > 0)
                     foreach (string s in subordinates)
                         o.GetActive(superior).subordinates.Add(s);
+                if (o.GetActive(superior).subordinates.Count == 0 && !o.GetActive(superior).solo && !o.GetActive(superior).squadLeader)
+                    o.GetActive(superior).solo = true;
             }
             if (subordinates.Count > 0)
                 foreach (string s in subordinates)

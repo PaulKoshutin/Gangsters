@@ -379,8 +379,8 @@ public class PlayerGangsterStrategy : Strategy
                 int bizzRoll = Random.Range(15, bizz.mental / 2 + bizz.social + bizz.physical / 2 + bizz.pay / 4);
                 if (bizzerRoll > bizzRoll)
                 {
-                    c.order = "";
-                    c.orderTarget = "";
+                    if (target != null)
+                        org.GetActive(c.name).order = "";
 
                     org.controlled.Add(bizz);
                     bizz.org = c.org;
@@ -403,8 +403,8 @@ public class PlayerGangsterStrategy : Strategy
             int bizzRoll = Random.Range(15, bizz.mental / 2 + bizz.social + bizz.physical / 2 + bizz.pay / 4 + otherOrg.respect);
             if (bizzerRoll > bizzRoll)
             {
-                c.order = "";
-                c.orderTarget = "";
+                if (target != null)
+                    org.GetActive(c.name).order = "";
 
                 org.controlled.Add(bizz);
                 otherOrg.controlled.Remove(bizz);
@@ -439,8 +439,8 @@ public class PlayerGangsterStrategy : Strategy
             int bizzRoll = Random.Range(15, bizz.mental/2 + bizz.social/2 + bizz.physical);
             if (bizzerRoll > bizzRoll)
             {
-                c.order = "";
-                c.orderTarget = "";
+                if (target != null)
+                    org.GetActive(c.name).order = "";
                 if (bizzerRoll > bizzRoll * 2 && Random.Range(1, 100) < 20)
                 {
                     if (bizz.wounded)
@@ -483,10 +483,10 @@ public class PlayerGangsterStrategy : Strategy
             int bizzRoll = Random.Range(15, bizz.mental / 2 + bizz.social / 2 + bizz.physical);
             if (bizzerRoll > bizzRoll)
             {
+                if (target != null)
+                    org.GetActive(c.name).order = "";
                 if (bizzerRoll > bizzRoll * 2 && Random.Range(1, 100) < 20)
                 {
-                    c.order = "";
-                    c.orderTarget = "";
                     if (bizz.wounded)
                     {
                         district.CriminalityChange(Random.Range(5, 10));
@@ -563,8 +563,8 @@ public class PlayerGangsterStrategy : Strategy
                 int bizzRoll = Random.Range(15, bizz.mental + bizz.social / 2 + bizz.physical / 2);
                 if (bizzerRoll > bizzRoll)
                 {
-                    c.order = "";
-                    c.orderTarget = "";
+                    if (target != null)
+                        org.GetActive(c.name).order = "";
                     if (bizzerRoll > bizzRoll * 2 && Random.Range(1, 100) < 20)
                     {
                         if (bizz.wounded)
@@ -604,8 +604,8 @@ public class PlayerGangsterStrategy : Strategy
             int bizzRoll = Random.Range(15, bizz.mental + bizz.social / 2 + bizz.physical/2);
             if (bizzerRoll > bizzRoll)
             {
-                c.order = "";
-                c.orderTarget = "";
+                if (target != null)
+                    org.GetActive(c.name).order = "";
                 if (bizzerRoll > bizzRoll * 2 && Random.Range(1, 100) < 20)
                 {
                     if (bizz.wounded)
@@ -677,8 +677,8 @@ public class PlayerGangsterStrategy : Strategy
                     win = Combat(c, target);
                     if (win)
                     {
-                        c.order = "";
-                        c.orderTarget = "";
+                        if (target != null)
+                            org.GetActive(c.name).order = "";
                     }
                 }
                 else

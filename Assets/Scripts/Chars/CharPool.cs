@@ -22,6 +22,7 @@ public class CharPool : MonoBehaviour
 
     private void Start()
     {
+        /*
         if (!SaveLoader.Instance.loading)
         {
             foreach (District d in ActiveEntities.Instance.districts)
@@ -34,11 +35,11 @@ public class CharPool : MonoBehaviour
                 foreach (string t in new List<string>() { "businessman", "policeman" })
                     listToGen.Add(new CharsToGen(t, d.name, "", 2));
         }
-
+        */
         generationIsDone = true;
 
 
-        /*
+        
         foreach (District d in ActiveEntities.Instance.districts)
             foreach (string t in new List<string>() { "gangster", "businessman", "policeman" })
                 if (t == "gangster")
@@ -46,7 +47,7 @@ public class CharPool : MonoBehaviour
                         listToGen.Add(new CharsToGen(t, d.name, o.name, 2));
                 else
                     listToGen.Add(new CharsToGen(t, d.name, "", 2));
-        */
+        
         
     }
 

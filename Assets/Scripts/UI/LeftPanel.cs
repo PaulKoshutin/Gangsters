@@ -70,13 +70,15 @@ public class LeftPanel : MonoBehaviour
         info.GetComponent<TextMeshProUGUI>().text = c.GetDescription() + "\n\nOperates in " + c.district + " district";
         if (c.order != "")
             info.GetComponent<TextMeshProUGUI>().text += "\nOn mission to " + c.order + " " + c.orderTarget;
+        if (c.wounded)
+            info.GetComponent<TextMeshProUGUI>().text += "\n\nWounded";
         buttons.gameObject.SetActive(true);
         buttons.transform.GetChild(3).gameObject.SetActive(false);
         buttons.transform.Find("Action Dropdown").GetComponent<TMP_Dropdown>().value = 0;
         if (c.org != "" && org.player)
         {
             buttons.transform.GetChild(1).gameObject.SetActive(true);
-            if (org.active.Contains(c) && (c.subordinates.Count > 0 || c.solo))
+            if (org.active.Contains(c) && (c.subordinates.Count > 0 || c.solo || c.squadLeader))
             {
                 buttons.transform.GetChild(0).gameObject.SetActive(true);
                 switch (c.strategy)
@@ -138,7 +140,9 @@ public class LeftPanel : MonoBehaviour
             c.Move("Eastmouth");
         else if (val == 4)
             c.Move("Westboro");
-        
+        else if (val == 5)
+            c.order = "";
+
     }
     public void ChoosePolicy(int val)
     {
@@ -152,9 +156,10 @@ public class LeftPanel : MonoBehaviour
     }
     public void OpenOrderPanel()
     {
-        transform.parent.Find("Main Panel (Stuff)").Find("City Panel").gameObject.SetActive(false);
-        transform.parent.Find("Main Panel (Stuff)").Find("Gang Panel").gameObject.SetActive(false);
-        transform.parent.Find("Main Panel (Stuff)").Find("Order Panel").gameObject.SetActive(true);
+        transform.parent.Find("Main Panel (Stuff)").Find("Order Panel").localPosition = new Vector3(0, 0, 0);
+        transform.parent.Find("Main Panel (Stuff)").Find("Gang Panel").localPosition = new Vector3(5000, 0, 0);
+        transform.parent.Find("Main Panel (Stuff)").Find("City Panel").localPosition = new Vector3(5000, 0, 0);
+
         if (c.org != "" && ActiveEntities.Instance.GetOrg(c.org).player)
             transform.parent.Find("Main Panel (Stuff)").Find("Order Panel").GetComponent<OrderPanel>().SetExecutor(c);
         else

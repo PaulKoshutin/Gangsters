@@ -87,6 +87,6 @@ if __name__ == '__main__':
         print(assistant_message)
 
         payload = {"prompt": "(face close-up), SFW, " + sys.argv[1] + ", " + sys.argv[2] + ", " + sys.argv[3] + ", " + sys.argv[4] + direct_prompt + assistant_message,
-            "negative_prompt": "watermark, cleavage, breasts, NSFW, abs, abdomen, toples, naked", "seed": -1, "steps": 20, "width": 512, "height": 512, "cfg_scale": 2, "sampler_name": "LCM", "n_iter": 1,
+            "negative_prompt": "watermark, ((cleavage)), ((breasts)), NSFW, abs, abdomen, toples, ((naked))", "seed": -1, "steps": 20, "width": 512, "height": 512, "cfg_scale": 2, "sampler_name": "LCM", "n_iter": 1,
             "batch_size": 1, }
         call_txt2img_api(payload, name)
