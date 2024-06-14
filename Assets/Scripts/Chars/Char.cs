@@ -1,12 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.IO;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.U2D;
-using UnityEngine.UI;
 
 [Serializable]
 public class Char : ISerializationCallbackReceiver
@@ -61,7 +55,8 @@ public class Char : ISerializationCallbackReceiver
         targetedByOrder = "";
         this.wounded = false;
         this.dead = false;
-        this.description = "Name: " + name + "\nGang: " + org + "\nUpkeep: " + pay + "\nMental: " + mental + "\nSocial: " + social + "\nPhysical: " + physical;
+        draggableIcon = null;
+        this.description = "Name: " + name + "\nGang: " + org + "\nPay: " + pay + "\nMental: " + mental + "\nSocial: " + social + "\nPhysical: " + physical;
     }
     public Char(Char c, int mental, int social, int physical)
     {
@@ -87,24 +82,17 @@ public class Char : ISerializationCallbackReceiver
         this.wounded = c.wounded;
         this.dead = c.dead;
         draggableIcon = c.draggableIcon;
-        this.description = "Name: " + c.name + "\nGang: " + c.org + "\nUpkeep: " + c.pay + "\nMental: " + mental + "\nSocial: " + social + "\nPhysical: " + physical;
+        this.description = "Name: " + c.name + "\nGang: " + c.org + "\nPay: " + c.pay + "\nMental: " + mental + "\nSocial: " + social + "\nPhysical: " + physical;
     }
     public void Fire()
     {
-        Org o = ActiveEntities.Instance.GetOrg(org);
         District d = ActiveEntities.Instance.GetDistrict(district);
         foreach (Org or in ActiveEntities.Instance.orgs)
             if (or.known.Contains(this))
                 or.known.Remove(this);
-        if (d.businessmen.Contains(this))
+        if (type == "gangster")
         {
-            d.businessmen.Remove(this);
-            d.number_of_businesses -= 1;
-        }
-        if (d.policemen.Contains(this))
-            d.policemen.Remove(this);
-        if (o != null)
-        {
+            Org o = ActiveEntities.Instance.GetOrg(org);
             if (superior != "")
             {
                 o.GetActive(superior).subordinates.Remove(name);
@@ -119,29 +107,35 @@ public class Char : ISerializationCallbackReceiver
                 o.DestroyOrg();
             if (o.reserve.Contains(this))
                 o.reserve.Remove(this);
+            this.dead = true;
+        }
+        else if (type == "policeman")
+        {
+            d.policemen.Remove(this);
+            if (subordinates.Count > 0)
+            {
+                d.policemen[1].superior = "";
+                d.policemen[1].squadLeader = true;
+                if (d.policemen.Count > 2)
+                    for (int i = 2; i < d.policemen.Count; i++)
+                    {
+                        d.policemen[1].subordinates.Add(d.policemen[i].name);
+                        d.policemen[i].superior = d.policemen[1].name;
+                    }
+            }
+            else
+                if (d.policemen[0] != null)
+                    d.policemen[0].subordinates.Remove(name);
         }
         else
         {
-            if (superior != "")
-            {
-                d.policemen[0].subordinates.Remove(name);
-                if (subordinates.Count > 0)
-                    foreach (string s in subordinates)
-                        d.policemen[0].subordinates.Add(s);
-            }
-            if (subordinates.Count > 0)
-                foreach (string s in subordinates)
-                    d.policemen.Find(i=>i.name == s).superior = this.superior;
+            d.businessmen.Remove(this);
+            d.number_of_businesses -= 1;
+            if (org != "")
+                ActiveEntities.Instance.GetOrg(org).controlled.Remove(this);
         }
         if (draggableIcon != null)
             draggableIcon.Fire();
-        this.dead = true;
-    }
-    public void PostFireCleanup()
-    {
-        Org o = ActiveEntities.Instance.GetOrg(org);
-        if (o.active.Contains(this) && this.dead)
-            o.active.Remove(this);
     }
     public void Free()
     {
@@ -203,6 +197,11 @@ public class Char : ISerializationCallbackReceiver
         mental *= 2; 
         social *= 2;
         physical *= 2;
+    }
+    public string GetDescription()
+    {
+        description = "Name: " + name + "\nGang: " + org + "\nPay: " + pay + "\nMental: " + mental + "\nSocial: " + social + "\nPhysical: " + physical;
+        return description;
     }
     public void OnAfterDeserialize()
     {

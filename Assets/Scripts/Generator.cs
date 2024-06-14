@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
-using UnityEditor.PackageManager;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Debug = UnityEngine.Debug;
@@ -137,10 +135,10 @@ public class Generator : MonoBehaviour
         else
         {
             generationOfCharIsDone = true;
+            charName = name;
 
             if (!manual)
             {
-                charName = name;
                 CharPool.Instance.RemoveFromList(type, districtName, orgName);
             }
         }   
@@ -199,7 +197,7 @@ public class Generator : MonoBehaviour
             physical += Random.Range(5, 20);
             mental -= Random.Range(5, 20);
         }
-        if (type == "policeman")
+        if (type == "policeman" || manual)
         {
             mental += Random.Range(5, 20);
             social += Random.Range(5, 20);
@@ -233,8 +231,10 @@ public class Generator : MonoBehaviour
             CharPool.Instance.AddCharToPool(c);
         else
         {
+            o.active.Clear();
             o.AddToActive(c);
             GameObject.FindGameObjectWithTag("New Char Image").GetComponent<Image>().sprite = Utils.Instance.LoadNewSprite("Images/" + charName + ".png");
+            GameObject.FindGameObjectWithTag("New Char Name").GetComponent<TMP_InputField>().text = charName;
         }
         charName = "";
         generationOfCharIsDone = false;
@@ -244,7 +244,8 @@ public class Generator : MonoBehaviour
     {
         Sprite emblem = Utils.Instance.LoadNewSprite("Images/" + orgName + ".png");
         GameObject.FindGameObjectWithTag("New Org Image").GetComponent<Image>().sprite = emblem;
-        o = new Org(orgName, color, 500, true, emblem);
+        GameObject.FindGameObjectWithTag("New Org Name").GetComponent<TMP_InputField>().text = orgName;
+        o = new Org(orgName, color, 6000, true, emblem);
         generationOfOrgIsDone = false;
     }
     private void Update()

@@ -1,13 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
-using Debug = UnityEngine.Debug;
 
 public class CharPool : MonoBehaviour
 {
@@ -28,13 +22,13 @@ public class CharPool : MonoBehaviour
 
     private void Start()
     {
-        if (!SaveLoader.Instance.loading)     
+        if (!SaveLoader.Instance.loading)
         {
             foreach (District d in ActiveEntities.Instance.districts)
                 listToGen.Add(new CharsToGen("gangster", d.name, ActiveEntities.Instance.orgs[0].name, 2));
 
             for (int i = 1; i < ActiveEntities.Instance.orgs.Count; i++)
-                listToGen.Add(new CharsToGen("gangster", ActiveEntities.Instance.districts[i-1].name, ActiveEntities.Instance.orgs[i].name, 2));
+                listToGen.Add(new CharsToGen("gangster", ActiveEntities.Instance.districts[i - 1].name, ActiveEntities.Instance.orgs[i].name, 2));
 
             foreach (District d in ActiveEntities.Instance.districts)
                 foreach (string t in new List<string>() { "businessman", "policeman" })
@@ -49,10 +43,11 @@ public class CharPool : MonoBehaviour
             foreach (string t in new List<string>() { "gangster", "businessman", "policeman" })
                 if (t == "gangster")
                     foreach (Org o in ActiveEntities.Instance.orgs)                        
-                        listToGen.Add(new CharsToGen(t, d, o, 1));
+                        listToGen.Add(new CharsToGen(t, d.name, o.name, 2));
                 else
-                    listToGen.Add(new CharsToGen(t, d, null, 1));
+                    listToGen.Add(new CharsToGen(t, d.name, "", 2));
         */
+        
     }
 
     public Char GetCharFromPool(string type, string district, string org="")

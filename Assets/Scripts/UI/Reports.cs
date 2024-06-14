@@ -20,7 +20,7 @@ public class Reports : MonoBehaviour
     {
         string old = text.text;
         text.text = report + "\n" + old;
-        if (text.text.Length > 300)
+        if (text.text.Length > 1500)
         {
             int lastPos = text.text.LastIndexOf("\n");
             text.text = text.text.Substring(0, text.text.LastIndexOf("\n", lastPos - 1));

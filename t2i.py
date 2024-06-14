@@ -52,7 +52,7 @@ if __name__ == '__main__':
 
         payload = {"prompt": "gang emblem of " + sys.argv[2] + ", ((black background)), " + descr, "negative_prompt": "1girl, 1boy, man, woman, person, gray background, watermark",
             "seed": -1, "steps": 20, "width": 512, "height": 512, "cfg_scale": 2, "sampler_name": "LCM", "n_iter": 1, "batch_size": 1, }
-        call_txt2img_api(payload, sys.argv[2])
+        call_txt2img_api(payload, gang_name)
     else:
         if len(sys.argv) < 7:
             user_message = "Provide a name and surname for a modern day " + sys.argv[1] + " " + sys.argv[2] + " " + sys.argv[3] + " " + sys.argv[
@@ -67,7 +67,7 @@ if __name__ == '__main__':
         name = "".join(x for x in name if (x.isalnum() or x in "._- "))
         print(name)
 
-        user_message_universal = " Mention age, race, hair color, haircut, emotion, background scenery, fatness, clothes, facial hair if any. If it's a man he can either have a beard a moustache or be clean-shaven - specify it in the description. Type of clothes depends on being poor or rich. Don't mention boots, pants or trousers, focus on the upper body and face. Say nothing before or after the description."
+        user_message_universal = " Mention age, race, hair color, haircut, emotion, background scenery, fatness, clothes, facial hair if any. The face may be clean-shaven - specify it in the description. Type of clothes depends on being poor or rich. Don't mention boots, pants or trousers, focus on the upper body and face. Say nothing before or after the description."
 
         if sys.argv[4] == "gangster":
             direct_prompt = " wearing (" + sys.argv[5] + ") clothes , "
@@ -87,6 +87,6 @@ if __name__ == '__main__':
         print(assistant_message)
 
         payload = {"prompt": "(face close-up), SFW, " + sys.argv[1] + ", " + sys.argv[2] + ", " + sys.argv[3] + ", " + sys.argv[4] + direct_prompt + assistant_message,
-            "negative_prompt": "watermark, cleavage, breasts, NSFW", "seed": -1, "steps": 20, "width": 512, "height": 512, "cfg_scale": 2, "sampler_name": "LCM", "n_iter": 1,
+            "negative_prompt": "watermark, cleavage, breasts, NSFW, abs, abdomen, toples, naked", "seed": -1, "steps": 20, "width": 512, "height": 512, "cfg_scale": 2, "sampler_name": "LCM", "n_iter": 1,
             "batch_size": 1, }
         call_txt2img_api(payload, name)

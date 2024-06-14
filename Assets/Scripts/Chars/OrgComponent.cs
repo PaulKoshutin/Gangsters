@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,14 +10,33 @@ public abstract class OrgComponent: MonoBehaviour, IDropHandler
     {
         if (transform.childCount == 0)
         {
+            // Commander replacement
+            if (transform.name == "CharSlotMain")
+            {
+                DraggableChar dc = eventData.pointerDrag.GetComponent<DraggableChar>();
+                transform.GetComponent<OrgComponent>().officeholder = dc.c;
+
+                dc.parentAfterDrag = transform;
+                dc.c.superior = transform.GetComponent<OrgComposite>().superior.officeholder.name;
+                transform.GetComponent<OrgComposite>().superior.officeholder.subordinates.Add(dc.c.name);
+                dc.c.solo = transform.GetComponent<OrgComposite>().solo;
+                dc.c.squadLeader = transform.GetComponent<OrgComposite>().squadLeader;
+                ActiveEntities.Instance.GetOrg(dc.c.org).AddToActive(dc.c);
+                foreach (OrgComponent o in gameObject.GetComponent<OrgComposite>().subordinates)
+                {
+                    transform.GetComponent<OrgComposite>().superior.officeholder.subordinates.Remove(o.officeholder.name);
+                    dc.c.subordinates.Add(o.officeholder.name);
+                    o.officeholder.superior = dc.c.name;
+                }
+            }
             // Commander assignment
-            if (transform.parent.name == "Main" && transform.parent.childCount > 1)
+            else if (transform.parent.name == "Main" && transform.parent.childCount > 1)
             {
                 Transform sub = transform.parent.parent.Find("Sub");
                 GameObject newTop = Instantiate(Resources.Load("Prefabs/Top", typeof(GameObject)), parent: sub) as GameObject;
                 Transform CharSlotMain = newTop.transform.Find("Main").Find("CharSlotMain");
                 DraggableChar dc = eventData.pointerDrag.GetComponent<DraggableChar>();
-                CharSlotMain.GetComponent<OrgComposite>().officeholder = dc.c;
+                CharSlotMain.GetComponent<OrgComponent>().officeholder = dc.c;
                 transform.parent.Find("CharSlotMain").GetComponent<OrgComposite>().Add(CharSlotMain.gameObject.GetComponent<OrgComposite>());
 
                 dc.parentAfterDrag = CharSlotMain;
@@ -78,28 +95,20 @@ public abstract class OrgComponent: MonoBehaviour, IDropHandler
             else if (transform.parent.name == "Sub" && transform.parent.childCount > 1)
             {
                 DraggableChar dc = eventData.pointerDrag.GetComponent<DraggableChar>();
-                if (transform.parent.childCount < 4)
+                dc.parentAfterDrag = transform;
+                transform.parent.parent.Find("Main").GetChild(0).GetComponent<OrgComposite>().Add(gameObject.GetComponent<OrgLeaf>());
+                dc.c.superior = gameObject.GetComponent<OrgLeaf>().superior.officeholder.name;
+                gameObject.GetComponent<OrgLeaf>().superior.officeholder.subordinates.Add(dc.c.name);
+                gameObject.GetComponent<OrgLeaf>().officeholder = dc.c;
+                ActiveEntities.Instance.GetOrg(dc.c.org).AddToActive(dc.c);
+                gameObject.GetComponent<OrgLeaf>().superior = transform.parent.parent.Find("Main").GetChild(0).GetComponent<OrgComposite>();
+                if (transform.parent.childCount < 4 && gameObject.GetComponent<OrgLeaf>().superior.officeholder.subordinates.Count == transform.parent.childCount)
                 {
                     GameObject newChar = Instantiate(Resources.Load("Prefabs/CharSlotLeaf", typeof(GameObject))) as GameObject;
                     newChar.transform.SetParent(transform.parent);
                 }
-                dc.parentAfterDrag = transform;
-                transform.parent.parent.Find("Main").GetChild(0).GetComponent<OrgComposite>().Add(gameObject.GetComponent<OrgLeaf>());
-                dc.c.superior = gameObject.GetComponent<OrgLeaf>().superior.officeholder.name;
-                gameObject.GetComponent<OrgLeaf>().officeholder = dc.c;
-                ActiveEntities.Instance.GetOrg(dc.c.org).AddToActive(dc.c);
             }
-            // Replacement
-            else if (transform.name == "CharSlotMain")
-            {
-                DraggableChar dc = eventData.pointerDrag.GetComponent<DraggableChar>();
-                dc.parentAfterDrag = transform;
-                dc.c.superior = gameObject.GetComponent<OrgComponent>().superior.officeholder.name;
-                foreach (OrgComponent o in gameObject.GetComponent<OrgComposite>().subordinates)
-                    dc.c.subordinates.Add(o.officeholder.name);
-                gameObject.GetComponent<OrgComponent>().officeholder = dc.c;
-                ActiveEntities.Instance.GetOrg(dc.c.org).AddToActive(dc.c);
-            }
+            
         }
     }
     public abstract void Add(OrgComponent c);

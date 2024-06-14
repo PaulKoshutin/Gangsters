@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Xml.Linq;
-using UnityEditor.Experimental;
-using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 using Random = UnityEngine.Random;
 
 public class Strategy
@@ -97,16 +90,17 @@ public class Strategy
         Char them = ActiveEntities.Instance.patrols.Find(i => (i.org == otherOrg && i.district == district.name));
         if (them != null)
         {
-            int evasionRoll = Random.Range(25, us.mental + us.social / 2);
+            int evasionRoll = Random.Range(15, us.mental + us.social / 2);
             int searchRoll = Random.Range(1, them.mental + them.social / 2);
             if (otherOrg == "")  
-                searchRoll += district.criminality / 4; 
+                searchRoll -= district.criminality / 4; 
             if (us.strategy == "Hunt")
                 searchRoll += district.criminality / 4;
             if (evasionRoll > searchRoll)
                 return true;
             else
             {
+                ActiveEntities.Instance.GetOrg(us.org).AddToKnown(them);
                 int deceptionRoll = Random.Range(25, us.mental / 2 + us.social);
                 int investigationRoll = Random.Range(1, them.mental / 2 + them.social);
                 if (otherOrg == "")  
@@ -129,11 +123,11 @@ public class Strategy
     {
         District district = ActiveEntities.Instance.GetDistrict(us.district);
         Org org = ActiveEntities.Instance.GetOrg(us.org);
-        Org otherOrg;
+        bool police = false;
         if (them.org == "")
-            otherOrg = null;
-        else
-            otherOrg = ActiveEntities.Instance.GetOrg(them.org);
+            police = true;
+        Org otherOrg = ActiveEntities.Instance.GetOrg(them.org);
+        ActiveEntities.Instance.GetOrg(us.org).AddToKnown(them);
         while (true)
         {
             int ourCombatRoll = Random.Range(us.mental / 4 + us.physical / 4, us.mental + us.physical);
@@ -157,7 +151,7 @@ public class Strategy
                             {
                                 c.Fire();
                                 district.CriminalityChange(Random.Range(1, 5));
-                                if (otherOrg != null)
+                                if (!police)
                                 {
                                     if (otherOrg.GetPolicyTowards(c.org) != "War")
                                         if (Random.Range(1, 100) < 10)
@@ -165,8 +159,10 @@ public class Strategy
                                     if (otherOrg.player)
                                         Reports.Instance.AddReport("We killed one of the " + c.org + "! Name: " + c.name + ", District: " + c.district);
                                 }
-                                if (org.player)
-                                    Reports.Instance.AddReport("One our men was killed! Name: " + c.name + ", District: " + c.district);
+                                if (org.player && !police)
+                                    Reports.Instance.AddReport("One of our men was killed by the "+otherOrg+"! Name: " + c.name + ", District: " + c.district);
+                                else if (org.player)
+                                    Reports.Instance.AddReport("One of our men was killed by the policemen! Name: " + c.name + ", District: " + c.district);
                                 us.subordinates.Remove(sub);
                                 break;
                             }
@@ -187,7 +183,7 @@ public class Strategy
                             org.GetActive(us.name).Fire();
                             district.CriminalityChange(Random.Range(1, 5));
                             org.RespectChange(-Random.Range(1, 5));
-                            if (otherOrg != null)
+                            if (!police)
                             {
                                 otherOrg.RespectChange(Random.Range(1, 5));
                                 if (otherOrg.GetPolicyTowards(us.org) != "War")
@@ -197,7 +193,9 @@ public class Strategy
                                     Reports.Instance.AddReport("We wiped out a squad of " + us.org + "! Name: " + us.name + ", District: " + us.district);
                             }
                             if (org.player)
-                                Reports.Instance.AddReport("One our squads was wiped out! Leader name: " + us.name + ", District: " + us.district);
+                                Reports.Instance.AddReport("One of our squads was wiped out by the "+otherOrg+"! Leader name: " + us.name + ", District: " + us.district);
+                            else if (org.player)
+                                Reports.Instance.AddReport("One of our squads was wiped out by the policemen! Leader name: " + us.name + ", District: " + us.district);
                             return false;
                         }
                     }
@@ -209,7 +207,7 @@ public class Strategy
                     foreach (string sub in them.subordinates)
                     {
                         Char c;
-                        if (otherOrg != null)
+                        if (!police)
                             c = otherOrg.GetActive(sub);
                         else
                             c = ActiveEntities.Instance.GetDistrict(them.district).policemen.Find(i=>i.name == sub);
@@ -226,16 +224,18 @@ public class Strategy
                             {
                                 c.Fire();
                                 district.CriminalityChange(Random.Range(1, 5));
-                                if (otherOrg != null)
+                                if (!police)
                                 {
                                     if (org.GetPolicyTowards(c.org) != "War")
                                         if (Random.Range(1, 100) < 10)
                                             org.SetPolicyTowards(c.org, "War");
                                     if (otherOrg.player)
-                                        Reports.Instance.AddReport("One of our men was killed! Name: " + c.name + ", District: " + c.district);
+                                        Reports.Instance.AddReport("One of our men was killed by the "+org+"! Name: " + c.name + ", District: " + c.district);
                                 }
-                                if (org.player)
+                                if (org.player && !police)
                                     Reports.Instance.AddReport("We killed one of the " + c.org + "! Name: " + c.name + ", District: " + c.district);
+                                else if (org.player)
+                                    Reports.Instance.AddReport("We killed one of the policemen! Name: " + c.name + ", District: " + c.district);
                                 them.subordinates.Remove(sub);
                                 break;
                             }
@@ -246,7 +246,7 @@ public class Strategy
                     saveThrow = Random.Range(them.physical / 4, them.physical + us.physical);
                     if (saveThrow < theirCombatRoll)
                     {
-                        if (otherOrg != null)
+                        if (!police)
                         {
                             if (!otherOrg.GetActive(them.name).wounded)
                             {
@@ -261,11 +261,11 @@ public class Strategy
                                     if (Random.Range(1, 100) < 10)
                                         org.SetPolicyTowards(them.org, "War");
                                 if (otherOrg.player)
-                                    Reports.Instance.AddReport("One our squads was wiped out! Leader name: " + them.name + ", District: " + them.district);
+                                    Reports.Instance.AddReport("One of our squads was wiped out by the "+org+"! Leader name: " + them.name + ", District: " + them.district);
                                 district.CriminalityChange(Random.Range(1, 5));
                                 org.RespectChange(Random.Range(1, 5));
                                 if (org.player)
-                                    Reports.Instance.AddReport("We wiped out a squad of " + them.org + "! Name: " + them.name + ", District: " + them.district);
+                                    Reports.Instance.AddReport("We wiped out a squad of the " + otherOrg + "! Name: " + them.name + ", District: " + them.district);
                                 return true;
                             }
                         }
@@ -283,7 +283,7 @@ public class Strategy
                                 district.CriminalityChange(Random.Range(1, 5));
                                 org.RespectChange(Random.Range(1, 5));
                                 if (org.player)
-                                    Reports.Instance.AddReport("We wiped out a squad of " + them.org + "! Name: " + them.name + ", District: " + them.district);
+                                    Reports.Instance.AddReport("We wiped out a squad of the policemen! Name: " + them.name + ", District: " + them.district);
                                 return true;
                             }
                         }
@@ -330,7 +330,7 @@ public class PlayerGangsterStrategy : Strategy
         Org org = ActiveEntities.Instance.GetOrg(c.org);
         Char recruit = org.GetRecruitable();
         int findingRoll = Random.Range(1, c.mental / 2 + c.social);
-        int findingDifficultyRoll = Random.Range(15, 500);
+        int findingDifficultyRoll = Random.Range(15, 400);
         if ((recruit == null && findingRoll > findingDifficultyRoll) || recruit != null) 
         {
             if (recruit == null && findingRoll > findingDifficultyRoll)
@@ -361,7 +361,7 @@ public class PlayerGangsterStrategy : Strategy
         Org org = ActiveEntities.Instance.GetOrg(c.org);
         Char bizz = org.GetExtortable();
         int findingRoll = Random.Range(1, c.mental / 2 + c.social);
-        int findingDifficultyRoll = Random.Range(15, 500);
+        int findingDifficultyRoll = Random.Range(15, 400);
         if (bizz == null && findingRoll > findingDifficultyRoll)
             bizz = ActiveEntities.Instance.GetDistrict(c.district).GetExtortable(org);
         if ((bizz == null && findingRoll > findingDifficultyRoll) || (bizz != null && bizz.org == ""))
@@ -369,15 +369,19 @@ public class PlayerGangsterStrategy : Strategy
             if (bizz == null && findingRoll > findingDifficultyRoll)
             {
                 bizz = CharPool.Instance.GetCharFromPool("businessman", c.district, "");
-                ActiveEntities.Instance.GetDistrict(c.district).businessmen.Add(bizz);
+                if (bizz != null)
+                    ActiveEntities.Instance.GetDistrict(c.district).businessmen.Add(bizz);
             }
             if (bizz != null && AvoidPatrol(c, ""))
             {
                 org.AddToKnown(bizz);
                 int bizzerRoll = Random.Range(1, c.mental / 2 + c.social + org.respect);
-                int bizzRoll = Random.Range(15, bizz.mental + bizz.social + bizz.physical + bizz.pay / 3);
+                int bizzRoll = Random.Range(15, bizz.mental / 2 + bizz.social + bizz.physical / 2 + bizz.pay / 4);
                 if (bizzerRoll > bizzRoll)
                 {
+                    c.order = "";
+                    c.orderTarget = "";
+
                     org.controlled.Add(bizz);
                     bizz.org = c.org;
                     if (org.player)
@@ -396,9 +400,12 @@ public class PlayerGangsterStrategy : Strategy
             org.AddToKnown(bizz);
             Org otherOrg = ActiveEntities.Instance.GetOrg(bizz.org);
             int bizzerRoll = Random.Range(1, c.mental / 2 + c.social + org.respect);
-            int bizzRoll = Random.Range(15, bizz.mental + bizz.social + bizz.physical + bizz.pay/3 + otherOrg.respect);
+            int bizzRoll = Random.Range(15, bizz.mental / 2 + bizz.social + bizz.physical / 2 + bizz.pay / 4 + otherOrg.respect);
             if (bizzerRoll > bizzRoll)
             {
+                c.order = "";
+                c.orderTarget = "";
+
                 org.controlled.Add(bizz);
                 otherOrg.controlled.Remove(bizz);
                 org.RespectChange(Random.Range(1, 5));
@@ -409,7 +416,7 @@ public class PlayerGangsterStrategy : Strategy
                 if (org.player)
                     Reports.Instance.AddReport("New businessman taken from the "+otherOrg.name+"! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
                 else if (otherOrg.player)
-                    Reports.Instance.AddReport("One our businessmen was taken by the " + org.name + "! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
+                    Reports.Instance.AddReport("One of our businessmen was taken by the " + org.name + "! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
             }
             else
             {
@@ -429,8 +436,11 @@ public class PlayerGangsterStrategy : Strategy
         if (bizz != null && bizz.org == "" && AvoidPatrol(c, ""))
         {
             int bizzerRoll = Random.Range(1, c.social / 2 + c.physical);
-            int bizzRoll = Random.Range(15, bizz.mental + bizz.social + bizz.physical);
+            int bizzRoll = Random.Range(15, bizz.mental/2 + bizz.social/2 + bizz.physical);
             if (bizzerRoll > bizzRoll)
+            {
+                c.order = "";
+                c.orderTarget = "";
                 if (bizzerRoll > bizzRoll * 2 && Random.Range(1, 100) < 20)
                 {
                     if (bizz.wounded)
@@ -458,6 +468,7 @@ public class PlayerGangsterStrategy : Strategy
                     if (org.player)
                         Reports.Instance.AddReport("Businessman assaulted! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
                 }
+            }
             else
             {
                 org.RespectChange(-Random.Range(1, 5));
@@ -469,11 +480,13 @@ public class PlayerGangsterStrategy : Strategy
         {
             Org otherOrg = ActiveEntities.Instance.GetOrg(bizz.org);
             int bizzerRoll = Random.Range(1, c.social / 2 + c.physical);
-            int bizzRoll = Random.Range(15, bizz.mental + bizz.social + bizz.physical);
+            int bizzRoll = Random.Range(15, bizz.mental / 2 + bizz.social / 2 + bizz.physical);
             if (bizzerRoll > bizzRoll)
             {
                 if (bizzerRoll > bizzRoll * 2 && Random.Range(1, 100) < 20)
                 {
+                    c.order = "";
+                    c.orderTarget = "";
                     if (bizz.wounded)
                     {
                         district.CriminalityChange(Random.Range(5, 10));
@@ -532,7 +545,7 @@ public class PlayerGangsterStrategy : Strategy
         District district = ActiveEntities.Instance.GetDistrict(c.district);
         Char bizz = org.GetExtortable();
         int findingRoll = Random.Range(1, c.mental / 2 + c.social);
-        int findingDifficultyRoll = Random.Range(15, 500);
+        int findingDifficultyRoll = Random.Range(15, 400);
         if (bizz == null && findingRoll > findingDifficultyRoll)
             bizz = ActiveEntities.Instance.GetDistrict(c.district).GetExtortable(org);
         if ((bizz == null && findingRoll > findingDifficultyRoll) || (bizz != null && bizz.org == ""))
@@ -540,23 +553,37 @@ public class PlayerGangsterStrategy : Strategy
             if (bizz == null && findingRoll > findingDifficultyRoll)
             {
                 bizz = CharPool.Instance.GetCharFromPool("businessman", c.district, "");
-                ActiveEntities.Instance.GetDistrict(c.district).businessmen.Add(bizz);
+                if (bizz != null)
+                    ActiveEntities.Instance.GetDistrict(c.district).businessmen.Add(bizz);
             }
             if (bizz != null && AvoidPatrol(c, ""))
             {
                 org.AddToKnown(bizz);
                 int bizzerRoll = Random.Range(1, c.mental / 2 + c.physical);
-                int bizzRoll = Random.Range(15, bizz.mental + bizz.social + bizz.physical);
+                int bizzRoll = Random.Range(15, bizz.mental + bizz.social / 2 + bizz.physical / 2);
                 if (bizzerRoll > bizzRoll)
                 {
+                    c.order = "";
+                    c.orderTarget = "";
                     if (bizzerRoll > bizzRoll * 2 && Random.Range(1, 100) < 20)
                     {
-                        district.CriminalityChange(Random.Range(5, 10));
-                        org.RespectChange(Random.Range(1, 5));
-                        org.money += Random.Range(bizz.pay, bizz.pay * 4);
-                        bizz.Fire();
-                        if (org.player)
-                            Reports.Instance.AddReport("Businessman killed during robbery! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
+                        if (bizz.wounded)
+                        {
+                            district.CriminalityChange(Random.Range(5, 10));
+                            org.RespectChange(Random.Range(1, 5));
+                            org.money += Random.Range(bizz.pay, bizz.pay * 4);
+                            bizz.Fire();
+                            if (org.player)
+                                Reports.Instance.AddReport("Businessman killed during robbery! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
+                        }
+                        else
+                        {
+                            district.CriminalityChange(Random.Range(2, 7));
+                            org.money += Random.Range(bizz.pay, bizz.pay * 2);
+                            bizz.Wound();
+                            if (org.player)
+                                Reports.Instance.AddReport("Businessman wounded during robbery! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
+                        }
                     }
                     else
                     {
@@ -574,23 +601,42 @@ public class PlayerGangsterStrategy : Strategy
             org.AddToKnown(bizz);
             Org otherOrg = ActiveEntities.Instance.GetOrg(bizz.org);
             int bizzerRoll = Random.Range(1, c.mental / 2 + c.physical);
-            int bizzRoll = Random.Range(15, bizz.mental + bizz.social + bizz.physical);
+            int bizzRoll = Random.Range(15, bizz.mental + bizz.social / 2 + bizz.physical/2);
             if (bizzerRoll > bizzRoll)
             {
+                c.order = "";
+                c.orderTarget = "";
                 if (bizzerRoll > bizzRoll * 2 && Random.Range(1, 100) < 20)
                 {
-                    district.CriminalityChange(Random.Range(5, 10));
-                    org.RespectChange(Random.Range(1, 5));
-                    otherOrg.RespectChange(-Random.Range(5, 10));
-                    if (otherOrg.GetPolicyTowards(c.org) != "War")
-                        if (Random.Range(1, 100) < 10)
-                            otherOrg.SetPolicyTowards(c.org, "War");
-                    org.money += Random.Range(bizz.pay, bizz.pay * 4);
-                    bizz.Fire();
-                    if (org.player)
-                        Reports.Instance.AddReport("Businessman under the " + otherOrg.name + " killed during robbery! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
-                    if (otherOrg.player)
-                        Reports.Instance.AddReport("One of our businessmen killed by the " + org.name + " during robbery! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
+                    if (bizz.wounded)
+                    {
+                        district.CriminalityChange(Random.Range(5, 10));
+                        org.RespectChange(Random.Range(1, 5));
+                        otherOrg.RespectChange(-Random.Range(5, 10));
+                        if (otherOrg.GetPolicyTowards(c.org) != "War")
+                            if (Random.Range(1, 100) < 10)
+                                otherOrg.SetPolicyTowards(c.org, "War");
+                        org.money += Random.Range(bizz.pay, bizz.pay * 4);
+                        bizz.Fire();
+                        if (org.player)
+                            Reports.Instance.AddReport("Businessman under the " + otherOrg.name + " killed during robbery! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
+                        if (otherOrg.player)
+                            Reports.Instance.AddReport("One of our businessmen killed by the " + org.name + " during robbery! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
+                    }
+                    else
+                    {
+                        district.CriminalityChange(Random.Range(2, 7));
+                        otherOrg.RespectChange(-Random.Range(1, 5));
+                        if (otherOrg.GetPolicyTowards(c.org) != "War")
+                            if (Random.Range(1, 100) < 1)
+                                otherOrg.SetPolicyTowards(c.org, "War");
+                        org.money += Random.Range(bizz.pay, bizz.pay * 2);
+                        bizz.Wound();
+                        if (org.player)
+                            Reports.Instance.AddReport("Businessman under the " + otherOrg.name + " wounded during robbery! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
+                        if (otherOrg.player)
+                            Reports.Instance.AddReport("One of our businessmen wounded by the " + org.name + " during robbery! Name: " + bizz.name + ", District: " + bizz.district + ", Pay: " + bizz.pay);
+                    }
                 }
                 else
                 {
@@ -615,10 +661,11 @@ public class PlayerGangsterStrategy : Strategy
     {
         Org org = ActiveEntities.Instance.GetOrg(c.org);
         int findingRoll = Random.Range(1, c.mental / 2 + c.social);
-        int findingDifficultyRoll = Random.Range(15, 500);
+        int findingDifficultyRoll = Random.Range(15, 400);
         if (findingRoll > findingDifficultyRoll)
-        {
-            target = org.GetHuntable();
+        {   
+            if (target == null)
+                target = org.GetHuntable();
             if (target == null)
                 target = org.FindHuntable(c);
             if (target != null && AvoidPatrol(c, target.org))
@@ -626,13 +673,21 @@ public class PlayerGangsterStrategy : Strategy
                 bool win = false;
                 org.AddToKnown(target);
                 if (c.org != "")
-                    Combat(c, target);
+                {
+                    win = Combat(c, target);
+                    if (win)
+                    {
+                        c.order = "";
+                        c.orderTarget = "";
+                    }
+                }
                 else
+                {
                     win = Combat(target, c);
 
-                if (win)
-                    ActiveEntities.Instance.GetDistrict(c.district).CriminalityChange(-Random.Range(5, 10));
-
+                    if (win)
+                        ActiveEntities.Instance.GetDistrict(c.district).CriminalityChange(-Random.Range(5, 10));
+                }
             }
         }
     }

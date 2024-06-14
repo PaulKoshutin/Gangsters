@@ -64,7 +64,6 @@
     <Compile Include="Assets\Scripts\UI\TopButtons.cs" />
     <Compile Include="Assets\Scripts\UI\Search.cs" />
     <Compile Include="Assets\Scripts\ActiveEntities.cs" />
-    <Compile Include="Assets\Scripts\Activity.cs" />
     <Compile Include="Assets\Scripts\Org.cs" />
     <Compile Include="Assets\Scripts\Chars\Char.cs" />
     <Compile Include="Assets\Scripts\UI\Reports.cs" />

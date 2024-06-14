@@ -1,11 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.UIElements;
-using Random = UnityEngine.Random;
 
 [Serializable]
 public class District : ISerializationCallbackReceiver
@@ -38,7 +33,7 @@ public class District : ISerializationCallbackReceiver
         string output = "";
         foreach (OrgValuePair pair in district_control) 
         { 
-            output += "\n" + pair.org.name +": "+ pair.val;
+            output += "\n" + pair.org +": "+ pair.val;
         }
         return output;
     }
@@ -47,7 +42,7 @@ public class District : ISerializationCallbackReceiver
         foreach (OrgValuePair pair in district_control)
         {
             int sum = 0;
-            foreach (Char c in pair.org.controlled)
+            foreach (Char c in ActiveEntities.Instance.GetOrg(pair.org).controlled)
                 if (c.district == name)
                     sum++;
             pair.val = sum;
@@ -76,15 +71,6 @@ public class District : ISerializationCallbackReceiver
         }
         if (policemen.Count > 0)
         {
-            if (!policemen[0].squadLeader)
-            {
-                policemen[0].squadLeader = true;
-                for (int i = 1; i < policemen.Count; i++)
-                {
-                    policemen[0].subordinates.Add(policemen[i].name);
-                    policemen[i].superior = policemen[0].name;
-                }
-            }
             if (criminality < 80)
                 policemen[0].strategy = "Patrol";
             else
@@ -97,7 +83,7 @@ public class District : ISerializationCallbackReceiver
     public Char GetExtortable(Org o)
     {
         foreach (Char b in businessmen)
-            if (b.org != o.name)
+            if (b != null && b.org != o.name)
                 if (b.org == "" || o.GetPolicyTowards(b.org) != "Peace")
                     return b;
         return null;
@@ -139,10 +125,10 @@ public class KeyValuePair
 [Serializable]
 public class OrgValuePair
 {
-    public Org org;
+    public string org;
     public int val;
 
-    public OrgValuePair(Org org, int val)
+    public OrgValuePair(string org, int val)
     {
         this.org = org;
         this.val = val;

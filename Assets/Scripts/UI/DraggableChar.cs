@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -33,27 +31,33 @@ public class DraggableChar : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
 
     public void OnDrag(PointerEventData eventData)
     {
-        transform.position = Input.mousePosition;
+        if (ActiveEntities.Instance.orgs[0].money > c.pay)
+            transform.position = Input.mousePosition;
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        transform.SetParent(parentAfterDrag);
+        if (ActiveEntities.Instance.orgs[0].money > c.pay)
+        {
+            transform.SetParent(parentAfterDrag);
 
-        group.alpha = 1f;
-        image.raycastTarget = true;
+            group.alpha = 1f;
+            image.raycastTarget = true;
+        }
     }
-    public void SetChar(Char c)
+    public void SetChar(Char c, bool exclusive=true)
     {
         this.c = c;
         this.image.sprite = c.image;
-        c.draggableIcon = this;
+        if (exclusive)
+            c.draggableIcon = this;
     }
     public void Fire()
     {
         if (transform.parent.name != "Content")
         {
-            transform.parent.GetComponent<OrgComponent>().superior.officeholder.subordinates.Remove(c.name);
+            if (transform.parent.GetComponent<OrgComponent>().superior != null && transform.parent.GetComponent<OrgComponent>().superior.officeholder != null)
+                transform.parent.GetComponent<OrgComponent>().superior.officeholder.subordinates.Remove(c.name);
             if (transform.parent.name == "CharSlotMain")
                 foreach (OrgComponent sub in transform.parent.GetComponent<OrgComposite>().subordinates)
                     if (sub.officeholder != null)

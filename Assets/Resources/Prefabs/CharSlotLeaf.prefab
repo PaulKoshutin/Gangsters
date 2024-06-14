@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -113,4 +113,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24a4ffaba31b3dd4d916fc5d1f2481bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  officeholder:
+    type: 
+    name: 
+    description: 
+    image: {fileID: 0}
+    district: 
+    org: 
+    mental: 0
+    social: 0
+    physical: 0
+    pay: 0
+    squadLeader: 0
+    solo: 0
+    superior: 
+    subordinates: []
+    strategy: 
+    order: 
+    orderTarget: 
+    targetedByOrder: 
+    draggableIcon: {fileID: 0}
+    wounded: 0
+    dead: 0
   superior: {fileID: 0}

@@ -1,12 +1,6 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data.SqlTypes;
-using System.Runtime.CompilerServices;
-using UnityEditor;
 using UnityEngine;
-using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
-using UnityEngine.SocialPlatforms;
 using Random = UnityEngine.Random;
 
 [Serializable]
@@ -47,8 +41,10 @@ public class Org:ISerializationCallbackReceiver
     }
     public void AddToKnown(Char c)
     {
-        if (!known.Contains(c))
-            known.Add(c);
+        Char res = known.Find(i=>i.name == c.name);
+        if (res != null)
+            known.Remove(res);
+        known.Add(c);
     }
     public void AddToRecruitable(Char c)
     {
@@ -129,6 +125,13 @@ public class Org:ISerializationCallbackReceiver
     public void SetPolicyTowards(string orgName, string policy)
     {
         policies.Find(i => i.org == orgName).policy = policy;
+    }
+    public string GetPolicies()
+    {
+        string sum = "";
+        foreach (OrgPolicyPair pair in policies)
+            sum += "\n" + pair.org + " - " + pair.policy;
+        return sum;
     }
     public void RespectChange(int val)
     {

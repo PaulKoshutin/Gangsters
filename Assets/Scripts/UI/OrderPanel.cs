@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,7 +30,13 @@ public class OrderPanel : MonoBehaviour
         if (val == 0)
             order = "";
         else if (val == 1)
-            order = "Kill";
+            order = "Extort";
+        else if (val == 2)
+            order = "Punish";
+        else if (val == 3)
+            order = "Rob";
+        else if (val == 4)
+            order = "Hunt";
     }
     public void GiveTheOrder()
     {
@@ -44,8 +48,8 @@ public class OrderPanel : MonoBehaviour
 
             executor = null;
             target = null;
-            exeImage = null;
-            tarImage = null;
+            exeImage.sprite = null;
+            tarImage.sprite = null;
             order = "";
             transform.Find("Order Dropdown").GetComponent<TMP_Dropdown>().value = 0;
         }

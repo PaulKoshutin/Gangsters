@@ -1,8 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Search : MonoBehaviour
 {
@@ -42,6 +40,7 @@ public class Search : MonoBehaviour
     public void StartSearch()
     {
         List<Char> found = new List<Char>();
+        List<Char> unDupedFound = new List<Char>();
         Transform content = transform.Find("Char List Panel").Find("Scroll View").Find("Viewport").Find("Content");
         foreach (Transform child in content)
         {
@@ -70,7 +69,7 @@ public class Search : MonoBehaviour
                         found.Add(c);
             if (businessman)
                 foreach (Char c in known)
-                    if (c.type == "businessman")
+                    if (c.type == "businessman" && !ActiveEntities.Instance.orgs[0].controlled.Contains(c))
                         found.Add(c);
         }
         if (charName != "")
@@ -78,10 +77,13 @@ public class Search : MonoBehaviour
                 if (!found[i].name.Contains(charName))
                     found.RemoveAt(i);
         foreach (Char c in found)
+            if (!unDupedFound.Contains(c))
+                unDupedFound.Add(c);
+        foreach (Char c in unDupedFound)
         {
             GameObject row = Instantiate(Resources.Load("Prefabs/SearchRow", typeof(GameObject)), parent: content) as GameObject;
-            row.transform.GetChild(0).GetComponent<DraggableChar>().SetChar(c);
-            row.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = c.description;
+            row.transform.GetChild(0).GetComponent<DraggableChar>().SetChar(c, false);
+            row.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = c.GetDescription();
         }
     }
 }
