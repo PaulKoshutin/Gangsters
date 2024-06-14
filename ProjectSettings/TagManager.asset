@@ -7,6 +7,8 @@ TagManager:
   - District
   - New Org Image
   - New Char Image
+  - New Org Name
+  - New Char Name
   layers:
   - Default
   - TransparentFX
