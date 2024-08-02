@@ -3,24 +3,36 @@
   "WorkspaceRootPath": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\ui\\leftpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\generator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\generator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\strategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\strategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\activeentities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\activeentities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\ui\\topbuttons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\topbuttons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|f:\\unity\\projects\\gangsters\\gangsters\\assets\\scripts\\chars\\orgcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chars\\orgcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\chars\\charpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chars\\charpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|f:\\unity\\projects\\gangsters\\gangsters\\assets\\scripts\\ui\\leftpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\leftpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\chars\\hierarchymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chars\\hierarchymanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|f:\\unity\\projects\\gangsters\\gangsters\\assets\\scripts\\generator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\generator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|f:\\unity\\projects\\gangsters\\gangsters\\assets\\scripts\\activeentities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\activeentities.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\strategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\strategy.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\chars\\char.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,16 +43,8 @@
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\orderpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\ui\\topbuttons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\topbuttons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\utils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\utils.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\chars\\charpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chars\\charpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\ui\\draggablechar.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -54,24 +58,37 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 7,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 4,
+              "Title": "OrgComponent.cs",
+              "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Chars\\OrgComponent.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Chars\\OrgComponent.cs",
+              "ToolTip": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Chars\\OrgComponent.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Chars\\OrgComponent.cs",
+              "ViewState": "AQIAAEYAAAAAAAAAAAAQwGAAAAA7AAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-20T18:28:42.059Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "Generator.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Generator.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Generator.cs",
               "ToolTip": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Generator.cs",
               "RelativeToolTip": "Assets\\Scripts\\Generator.cs",
-              "ViewState": "AQIAAEcAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAAFwAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-14T13:00:38.83Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 10,
               "Title": "Utils.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Utils.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Utils.cs",
@@ -83,19 +100,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 5,
               "Title": "CharPool.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Chars\\CharPool.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Chars\\CharPool.cs",
               "ToolTip": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Chars\\CharPool.cs",
               "RelativeToolTip": "Assets\\Scripts\\Chars\\CharPool.cs",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAowDEAAAAIAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAABXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T10:20:13.863Z"
+              "WhenOpened": "2024-06-14T10:20:13.863Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 3,
               "Title": "TopButtons.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\UI\\TopButtons.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\TopButtons.cs",
@@ -103,11 +121,12 @@
               "RelativeToolTip": "Assets\\Scripts\\UI\\TopButtons.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAowCoAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T09:57:42.985Z"
+              "WhenOpened": "2024-06-14T09:57:42.985Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 7,
               "Title": "HierarchyManager.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Chars\\HierarchyManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Chars\\HierarchyManager.cs",
@@ -115,12 +134,11 @@
               "RelativeToolTip": "Assets\\Scripts\\Chars\\HierarchyManager.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T09:55:24.09Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-14T09:55:24.09Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 9,
               "Title": "OrderPanel.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\UI\\OrderPanel.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\OrderPanel.cs",
@@ -132,33 +150,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "ActiveEntities.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\ActiveEntities.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\ActiveEntities.cs",
               "ToolTip": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\ActiveEntities.cs",
               "RelativeToolTip": "Assets\\Scripts\\ActiveEntities.cs",
-              "ViewState": "AQIAAEsAAAAAAAAAAAAAwGgAAAARAAAA",
+              "ViewState": "AQIAAGsAAAAAAAAAAAAAAGgAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-14T09:45:37.019Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 6,
               "Title": "LeftPanel.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\UI\\LeftPanel.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\LeftPanel.cs",
               "ToolTip": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\UI\\LeftPanel.cs",
               "RelativeToolTip": "Assets\\Scripts\\UI\\LeftPanel.cs",
-              "ViewState": "AQIAAD8AAAAAAAAAAAAqwEsAAABCAAAA",
+              "ViewState": "AQIAAD8AAAAAAAAAAAA6wEsAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-14T09:42:29.174Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 8,
               "Title": "Char.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Chars\\Char.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Chars\\Char.cs",
@@ -170,7 +188,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "DraggableChar.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\UI\\DraggableChar.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\UI\\DraggableChar.cs",
@@ -182,15 +200,16 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "Strategy.cs",
               "DocumentMoniker": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Strategy.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Strategy.cs",
               "ToolTip": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Strategy.cs",
               "RelativeToolTip": "Assets\\Scripts\\Strategy.cs",
-              "ViewState": "AQIAAK0CAAAAAAAAAAAmwNACAAA2AAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-10T12:53:48.94Z"
+              "WhenOpened": "2024-06-10T12:53:48.94Z",
+              "EditorCaption": ""
             }
           ]
         }

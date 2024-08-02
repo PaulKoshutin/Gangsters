@@ -33,6 +33,8 @@ public abstract class OrgComponent: MonoBehaviour, IDropHandler
             else if (transform.parent.name == "Main" && transform.parent.childCount > 1)
             {
                 Transform sub = transform.parent.parent.Find("Sub");
+                Transform upperSub = transform.parent.parent.parent;
+                Transform oldTop = transform.parent.parent;
                 GameObject newTop = Instantiate(Resources.Load("Prefabs/Top", typeof(GameObject)), parent: sub) as GameObject;
                 Transform CharSlotMain = newTop.transform.Find("Main").Find("CharSlotMain");
                 DraggableChar dc = eventData.pointerDrag.GetComponent<DraggableChar>();
@@ -54,12 +56,35 @@ public abstract class OrgComponent: MonoBehaviour, IDropHandler
                     sub.GetComponent<GridLayoutGroup>().padding.top = 150;
                     sub.GetComponent<GridLayoutGroup>().padding.right = 200;
                     Destroy(sub.GetChild(0).gameObject);
+
+                    if (upperSub.name != "Content")
+                    {
+                        if (upperSub.childCount>1 && upperSub.GetChild(2) == oldTop)
+                        {
+                            sub.GetComponent<GridLayoutGroup>().padding.left = 470;
+                            oldTop.GetComponent<GridLayoutGroup>().padding.left = 700;
+                        }
+                    }
                 }
                 else if (sub.childCount == 2)
                 {
                     sub.GetComponent<GridLayoutGroup>().padding.right = 0;
                     sub.GetChild(0).GetComponent<GridLayoutGroup>().padding.right = 250;
                     sub.GetChild(1).GetComponent<GridLayoutGroup>().padding.left = 0;
+                    if (upperSub.name != "Content")
+                    {
+                        if (upperSub.GetChild(0) == oldTop)
+                        {
+                            sub.GetComponent<GridLayoutGroup>().padding.right = 400;
+                            oldTop.GetComponent<GridLayoutGroup>().padding.right = 350;
+                        }
+                        else if (upperSub.GetChild(1) == oldTop)
+                        {
+                            upperSub.GetChild(0).GetComponent<GridLayoutGroup>().padding.right = 400;
+                            if (upperSub.childCount > 1)
+                                upperSub.GetChild(2).GetComponent<GridLayoutGroup>().padding.left = 450;
+                        }
+                    }
                 }
                 else if (sub.childCount == 3)
                 {
@@ -67,6 +92,20 @@ public abstract class OrgComponent: MonoBehaviour, IDropHandler
                     sub.GetChild(0).GetComponent<GridLayoutGroup>().padding.right = 250;
                     sub.GetChild(1).GetComponent<GridLayoutGroup>().padding.left = 0;
                     sub.GetChild(2).GetComponent<GridLayoutGroup>().padding.left = 250;
+                    if (upperSub.name != "Content")
+                    {
+                        if (upperSub.GetChild(0) == oldTop)
+                        {
+                            sub.GetComponent<GridLayoutGroup>().padding.right = 700;
+                            oldTop.GetComponent<GridLayoutGroup>().padding.right = 700;
+                        }
+                        else if (upperSub.GetChild(1) == oldTop)
+                        {
+                            upperSub.GetChild(0).GetComponent<GridLayoutGroup>().padding.right = 700;
+                            if (upperSub.childCount > 1)
+                                upperSub.GetChild(2).GetComponent<GridLayoutGroup>().padding.left = 700;
+                        }
+                    }
                     Destroy(gameObject);
                 }
             }
