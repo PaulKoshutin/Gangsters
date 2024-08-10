@@ -3,7 +3,7 @@
   "WorkspaceRootPath": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\generator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|f:\\unity\\projects\\gangsters\\gangsters\\assets\\scripts\\generator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\generator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -19,7 +19,7 @@
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\topbuttons.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|f:\\unity\\projects\\gangsters\\gangsters\\assets\\scripts\\chars\\orgcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\chars\\orgcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chars\\orgcomponent.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -27,7 +27,7 @@
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\chars\\charpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|f:\\unity\\projects\\gangsters\\gangsters\\assets\\scripts\\ui\\leftpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|F:\\Unity\\Projects\\Gangsters\\Gangsters\\assets\\scripts\\ui\\leftpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{6F4349D4-885A-DDD0-72D0-B9F39F08EBC3}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\ui\\leftpanel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
@@ -81,7 +81,7 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\Generator.cs",
               "ToolTip": "F:\\Unity\\Projects\\Gangsters\\Gangsters\\Assets\\Scripts\\Generator.cs",
               "RelativeToolTip": "Assets\\Scripts\\Generator.cs",
-              "ViewState": "AQIAAFwAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "ViewState": "AQIAACgAAAAAAAAAAAAAADkAAAAkAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-06-14T13:00:38.83Z",
               "EditorCaption": ""
@@ -108,8 +108,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Chars\\CharPool.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAABXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T10:20:13.863Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-14T10:20:13.863Z"
             },
             {
               "$type": "Document",
@@ -121,8 +120,7 @@
               "RelativeToolTip": "Assets\\Scripts\\UI\\TopButtons.cs",
               "ViewState": "AQIAAAkAAAAAAAAAAAAowCoAAAAMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T09:57:42.985Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-14T09:57:42.985Z"
             },
             {
               "$type": "Document",
@@ -158,8 +156,7 @@
               "RelativeToolTip": "Assets\\Scripts\\ActiveEntities.cs",
               "ViewState": "AQIAAGsAAAAAAAAAAAAAAGgAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T09:45:37.019Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-14T09:45:37.019Z"
             },
             {
               "$type": "Document",
@@ -171,8 +168,7 @@
               "RelativeToolTip": "Assets\\Scripts\\UI\\LeftPanel.cs",
               "ViewState": "AQIAAD8AAAAAAAAAAAA6wEsAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-14T09:42:29.174Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-14T09:42:29.174Z"
             },
             {
               "$type": "Document",
@@ -208,8 +204,7 @@
               "RelativeToolTip": "Assets\\Scripts\\Strategy.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAACIAAAAXAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-10T12:53:48.94Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-06-10T12:53:48.94Z"
             }
           ]
         }
